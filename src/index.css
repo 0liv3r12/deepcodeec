@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-base: #0A0A0F;
+  --bg-surface: #111118;
+  --bg-card: #14141E;
+  --accent-blue: #38B6FF;
+  --accent-purple: #7B2FFF;
+  --accent-blue-dim: rgba(56, 182, 255, 0.15);
+  --accent-purple-dim: rgba(123, 47, 255, 0.15);
+  --text-primary: #E8F4FD;
+  --text-secondary: #8A9BB0;
+  --text-muted: #4A5568;
+  --border: rgba(56, 182, 255, 0.12);
+  --border-hover: rgba(56, 182, 255, 0.35);
+  --glow-blue: rgba(56, 182, 255, 0.25);
+  --glow-purple: rgba(123, 47, 255, 0.2);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

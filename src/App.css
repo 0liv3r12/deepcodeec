@@ -1,0 +1,76 @@
+/* ── Scroll & sections ── */
+section {
+    position: relative;
+    width: 100%;
+}
+
+/* ── Scroll reveal ── */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.animate-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Fondo animado global ── */
+.dc-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: var(--bg-base);
+    background-image:
+        radial-gradient(ellipse 80% 60% at 10% 20%, rgba(123, 47, 255, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 80%, rgba(56, 182, 255, 0.14) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(56, 182, 255, 0.05) 0%, transparent 70%);
+    animation: bg-shift 14s ease-in-out infinite alternate;
+}
+
+@keyframes bg-shift {
+    0% {
+        background-position: 0% 0%, 100% 100%, 50% 50%;
+    }
+
+    100% {
+        background-position: 15% 10%, 85% 90%, 55% 45%;
+    }
+}
+
+/* ── Utilidades ── */
+.gradient-text {
+    background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.section-subtitle {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    font-weight: 400;
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.65;
+}

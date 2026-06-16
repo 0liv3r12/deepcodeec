@@ -1,0 +1,225 @@
+#nosotros {
+    padding: 7rem clamp(1.5rem, 6vw, 6rem);
+}
+
+.nosotros-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* ── Left column ── */
+.nosotros-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.nosotros-intro {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+}
+
+/* ── Cards misión/visión ── */
+.nosotros-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.carta {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.carta:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 0 20px var(--glow-blue);
+}
+
+.carta h3 {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+    margin-bottom: 0.6rem;
+}
+
+.carta p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+/* ── Right column: team ── */
+.nosotros-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.team-label {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-blue);
+}
+
+/* ── Flip card ── */
+.flip-card {
+    width: 280px;
+    height: 360px;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.2rem;
+    backface-visibility: hidden;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.flip-card-front {
+    background: var(--bg-card);
+}
+
+.flip-card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flip-card-back {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56, 182, 255, 0.2) transparent;
+}
+
+.flip-card-back::-webkit-scrollbar {
+    width: 4px;
+}
+
+.flip-card-back::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.flip-card-back::-webkit-scrollbar-thumb {
+    background: rgba(56, 182, 255, 0.25);
+    border-radius: 2px;
+}
+
+.flip-card-back h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.flip-card-back .role {
+    font-size: 0.78rem;
+    color: var(--accent-blue);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.flip-card-back p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.flip-hint {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* ── Stats row ── */
+.nosotros-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.stat-number {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ── Mobile ── */
+@media screen and (max-width: 768px) {
+    #nosotros {
+        padding: 5rem 1.5rem;
+    }
+
+    .nosotros-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .nosotros-team {
+        order: -1;
+    }
+
+    .nosotros-stats {
+        gap: 1.5rem;
+    }
+}

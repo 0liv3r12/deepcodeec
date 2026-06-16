@@ -1,0 +1,237 @@
+#entornos {
+    padding: 7rem clamp(1.5rem, 6vw, 6rem);
+}
+
+.entornos-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.entornos-header .section-subtitle {
+    margin: 0 auto;
+}
+
+/* ── Tab selector ── */
+.servicios-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.servicio-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.4rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 2rem;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.servicio-tab:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    background: var(--accent-blue-dim);
+}
+
+.servicio-tab.active {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    background: var(--accent-blue-dim);
+    box-shadow: 0 0 16px rgba(56, 182, 255, 0.18);
+}
+
+.tab-icon {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+/* ── Panel principal ── */
+.servicios-panel {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    min-height: 420px;
+}
+
+/* ── Imagen lado ── */
+.panel-imagen {
+    position: relative;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    aspect-ratio: 4/3;
+    background: var(--bg-card);
+}
+
+.panel-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.panel-imagen::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            rgba(56, 182, 255, 0.08) 0%,
+            transparent 50%,
+            rgba(123, 47, 255, 0.06) 100%);
+    pointer-events: none;
+}
+
+.panel-imagen-glow {
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    z-index: -1;
+    opacity: 0.25;
+    filter: blur(8px);
+}
+
+/* ── Texto lado ── */
+.panel-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.panel-numero {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--accent-blue);
+    opacity: 0.6;
+}
+
+.panel-titulo {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+}
+
+.panel-titulo span {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.panel-descripcion {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+}
+
+/* ── Feature list ── */
+.panel-features {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.panel-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.feature-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    flex-shrink: 0;
+    box-shadow: 0 0 6px var(--accent-blue);
+}
+
+/* ── Animación fade ── */
+.panel-fade {
+    animation: panelFadeIn 0.35s ease forwards;
+}
+
+@keyframes panelFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Indicadores de navegación ── */
+.servicios-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+}
+
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-muted);
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    padding: 0;
+}
+
+.nav-dot.active {
+    background: var(--accent-blue);
+    width: 24px;
+    border-radius: 4px;
+    box-shadow: 0 0 8px var(--accent-blue);
+}
+
+/* ── Mobile ── */
+@media screen and (max-width: 768px) {
+    #entornos {
+        padding: 5rem 1.5rem;
+    }
+
+    .servicios-panel {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        min-height: auto;
+    }
+
+    .panel-imagen {
+        aspect-ratio: 16/9;
+        order: -1;
+    }
+
+    .servicios-tabs {
+        gap: 0.4rem;
+    }
+
+    .servicio-tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.82rem;
+    }
+}
