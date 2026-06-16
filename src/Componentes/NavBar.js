@@ -61,7 +61,7 @@ const NavBar = () => {
             {/* Redes sociales */}
             <div className="redes">
                 <a
-                    href="https://github.com/"
+                    href="https://github.com/0liv3r12"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="red-link"
@@ -72,7 +72,7 @@ const NavBar = () => {
                     </svg>
                 </a>
                 <a
-                    href="https://instagram.com/"
+                    href="https://www.instagram.com/deepcode_ec/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="red-link"
@@ -83,7 +83,7 @@ const NavBar = () => {
                     </svg>
                 </a>
                 <a
-                    href="https://wa.me/"
+                    href="https://wa.me/+593982999202"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="red-link"
