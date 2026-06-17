@@ -1,5 +1,5 @@
 import React from 'react';
-import Oliver from "../Imagenes/Oliver.png";
+import Oliver from "../Imagenes/Oliver.jpg";
 import '../Estilos/nosotros.css';
 
 const Nosotros = () => {
