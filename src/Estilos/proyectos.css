@@ -281,11 +281,19 @@
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
     background: #060610;
     border-radius: 1rem;
     border: 1px solid var(--border);
     overflow: hidden;
-    min-height: 500px;
+    height: 62vh;
+    max-height: 600px;
+}
+
+/* Cuando el item activo es vertical (móvil), el wrap se angosta */
+.visor-media-wrap.is-vertical {
+    max-width: 340px;
+    margin: 0 auto;
 }
 
 .visor-media {
@@ -293,25 +301,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem;
-    min-height: 500px;
+    padding: 1rem;
+    height: 100%;
+    width: 100%;
 }
 
-.visor-media img {
+.visor-media img,
+.visor-media video {
     max-width: 100%;
     max-height: 100%;
+    width: auto;
     height: auto;
-    width: 100%;
     border-radius: 0.5rem;
-    object-fit: fill;
+    object-fit: contain;
     display: block;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .visor-media video {
-    max-width: 100%;
-    max-height: 460px;
-    border-radius: 0.5rem;
-    display: block;
     background: #000;
 }
 
@@ -433,14 +440,17 @@
         border-radius: 1rem;
     }
 
-    .visor-media-wrap,
-    .visor-media {
-        min-height: 220px;
+    .visor-media-wrap {
+        height: 52vh;
+        max-height: 460px;
     }
 
-    .visor-media img,
-    .visor-media video {
-        max-height: 280px;
+    .visor-media-wrap.is-vertical {
+        max-width: 240px;
+    }
+
+    .visor-media {
+        padding: 0.5rem;
     }
 
     .visor-arrow {
@@ -450,7 +460,7 @@
     }
 
     .visor-thumb {
-        width: 62px;
+        width: 56px;
         height: 42px;
     }
 }

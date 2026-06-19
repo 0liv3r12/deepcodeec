@@ -1,14 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import dwp from '../Imagenes/dwp.png';
-import dmp from '../Imagenes/dmp.png';
-import dep from '../Imagenes/dep.png';
-import bdp from '../Imagenes/bdp.png';
-import vDe1 from '../Imagenes/vDe1.png';
-import vDe2 from '../Imagenes/vDe2.png';
-import vDe3 from '../Imagenes/vDe3.jpg';
-import vDe4 from '../Imagenes/vDe4.png';
-import vDe5 from '../Imagenes/vDe5.png';
-import vid1de from '../Imagenes/vid1de.mp4';
+import { img } from '../utils/imageLoader';
 import '../Estilos/proyectos.css';
 
 /* ── Proyectos por entorno ── */
@@ -20,29 +11,54 @@ const proyectosPorEntorno = {
             nombre: 'Sistema CRUD',
             tags: ['JavaScript', 'MySQL', 'CRUD', 'Dashboard'],
             galeria: [
-                { type: 'video', src: vid1de, label: 'Demo del sistema' },
-                { type: 'img',   src: vDe1,   label: 'Login' },
-                { type: 'img',   src: vDe2,   label: 'Dashboard' },
-                { type: 'img',   src: vDe3,   label: 'Clientes' },
-                { type: 'img',   src: vDe4,   label: 'Información personal' },
-                { type: 'img',   src: vDe5,   label: 'Módulo 5' },
+                { type: 'video', src: img('vid1de.mp4'), label: 'Demo del sistema' },
+                { type: 'img', src: img('vDe1.png'), label: 'Login' },
+                { type: 'img', src: img('vDe2.png'), label: 'Dashboard' },
+                { type: 'img', src: img('vDe3.jpg'), label: 'Clientes' },
+                { type: 'img', src: img('vDe4.png'), label: 'Información personal' },
+                { type: 'img', src: img('vDe5.png'), label: 'Módulo 5' },
+                { type: 'img', src: img('vDe6.png'), label: 'Módulo 6' },
             ],
         },
         // Agrega más proyectos de escritorio aquí
+    ],
+    movil: [
+        {
+            id: 1,
+            icon: '📱',
+            nombre: 'Vitaria',
+            tags: ['Flutter', 'Dart', 'Citas Médicas', 'UI/UX'],
+            galeria: [
+                { type: 'video', src: img('vid2dm.mp4'), label: 'Demo de la app' },
+                { type: 'img', src: img('vDm1.png'), label: 'Onboarding' },
+                { type: 'img', src: img('vDm2.png'), label: 'Login' },
+                { type: 'img', src: img('vDm3.png'), label: 'Inicio' },
+                { type: 'img', src: img('vDm4.png'), label: 'Especialidades' },
+                { type: 'img', src: img('vDm5.png'), label: 'Perfil de médico' },
+                { type: 'img', src: img('vDm6.png'), label: 'Selección de fecha' },
+                { type: 'img', src: img('vDm7.png'), label: 'Confirmación de cita' },
+                { type: 'img', src: img('vDm8.png'), label: 'Mis citas' },
+                { type: 'img', src: img('vDm9.png'), label: 'Perfil de usuario' },
+                { type: 'img', src: img('vDm10.png'), label: 'Panel admin' },
+                { type: 'img', src: img('vDm11.png'), label: 'Calendario admin' },
+            ],
+        },
+        // Agrega más proyectos móviles aquí
     ],
 };
 
 /* ── Cards del grid ── */
 const entornos = [
-    { id: 'web',       icon: '🌐', nombre: 'Web',           imagen: dwp, descripcion: 'Construimos experiencias web modernas, rápidas y escalables.' },
-    { id: 'movil',     icon: '📱', nombre: 'Móvil',         imagen: dmp, descripcion: 'Desarrollamos aplicaciones móviles intuitivas, potentes y multiplataforma.' },
-    { id: 'escritorio',icon: '🖥️', nombre: 'Escritorio',    imagen: dep, descripcion: 'Creamos aplicaciones de escritorio robustas, eficientes y adaptadas a tus necesidades.', tieneProyectos: true },
-    { id: 'bd',        icon: '🗄️', nombre: 'Base de Datos', imagen: bdp, descripcion: 'Diseñamos y optimizamos bases de datos seguras, eficientes y escalables.' },
+    { id: 'web', icon: '🌐', nombre: 'Web', imagen: img('dwp.png'), descripcion: 'Construimos experiencias web modernas, rápidas y escalables.' },
+    { id: 'movil', icon: '📱', nombre: 'Móvil', imagen: img('dmp.png'), descripcion: 'Desarrollamos aplicaciones móviles intuitivas, potentes y multiplataforma.', tieneProyectos: true },
+    { id: 'escritorio', icon: '🖥️', nombre: 'Escritorio', imagen: img('dep.png'), descripcion: 'Creamos aplicaciones de escritorio robustas, eficientes y adaptadas a tus necesidades.', tieneProyectos: true },
+    { id: 'bd', icon: '🗄️', nombre: 'Base de Datos', imagen: img('bdp.png'), descripcion: 'Diseñamos y optimizamos bases de datos seguras, eficientes y escalables.' },
 ];
 
 /* ════ Visor de galería ════ */
 const Visor = ({ proyecto }) => {
     const [activeIndex, setActiveIndex] = useState(0);
+    const [isVertical, setIsVertical] = useState(false);
     const items = proyecto.galeria;
     const current = items[activeIndex];
 
@@ -58,6 +74,23 @@ const Visor = ({ proyecto }) => {
         if (vid) vid.load();
     }, [activeIndex]);
 
+    // Detecta si el media activo es vertical (retrato) u horizontal
+    useEffect(() => {
+        if (current.type === 'img') {
+            const img = new Image();
+            img.onload = () => setIsVertical(img.naturalHeight > img.naturalWidth);
+            img.src = current.src;
+        } else {
+            // Para video, esperamos metadata
+            setIsVertical(false);
+        }
+    }, [current]);
+
+    const handleVideoMeta = (e) => {
+        const v = e.target;
+        setIsVertical(v.videoHeight > v.videoWidth);
+    };
+
     return (
         <div className="visor-wrapper">
             {/* Tags */}
@@ -70,11 +103,17 @@ const Visor = ({ proyecto }) => {
             )}
 
             {/* Media principal */}
-            <div className="visor-media-wrap">
+            <div className={`visor-media-wrap ${isVertical ? 'is-vertical' : ''}`}>
                 <button className="visor-arrow visor-arrow-left" onClick={prev}>‹</button>
                 <div className="visor-media">
                     {current.type === 'video' ? (
-                        <video id="visor-video" controls playsInline preload="metadata">
+                        <video
+                            id="visor-video"
+                            controls
+                            playsInline
+                            preload="metadata"
+                            onLoadedMetadata={handleVideoMeta}
+                        >
                             <source src={current.src} type="video/mp4" />
                         </video>
                     ) : (
@@ -110,7 +149,7 @@ const Visor = ({ proyecto }) => {
 };
 
 /* ════ Modal con tabs de proyectos ════ */
-const ModalProyectos = ({ entornoId, onClose }) => {
+const ModalProyectos = ({ entornoId, entornoNombre, onClose }) => {
     const lista = proyectosPorEntorno[entornoId] || [];
     const [activeProyecto, setActiveProyecto] = useState(lista[0]);
 
@@ -126,7 +165,7 @@ const ModalProyectos = ({ entornoId, onClose }) => {
 
                 {/* Header */}
                 <div className="mg-header">
-                    <h3 className="mg-titulo">Proyectos de Escritorio</h3>
+                    <h3 className="mg-titulo">Proyectos de {entornoNombre}</h3>
                     <button className="mg-close" onClick={onClose}>✕</button>
                 </div>
 
@@ -191,7 +230,7 @@ const Proyectos = () => {
                                 {e.tieneProyectos && (
                                     <button
                                         className="proyecto-btn"
-                                        onClick={() => setModalEntorno(e.id)}
+                                        onClick={() => setModalEntorno(e)}
                                     >
                                         Ver proyectos →
                                     </button>
@@ -204,7 +243,8 @@ const Proyectos = () => {
 
             {modalEntorno && (
                 <ModalProyectos
-                    entornoId={modalEntorno}
+                    entornoId={modalEntorno.id}
+                    entornoNombre={modalEntorno.nombre}
                     onClose={() => setModalEntorno(null)}
                 />
             )}
