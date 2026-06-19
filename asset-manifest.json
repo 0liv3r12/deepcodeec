@@ -1,9 +1,11 @@
 {
   "files": {
-    "main.css": "/static/css/main.97bec241.css",
-    "main.js": "/static/js/main.59842a3e.js",
+    "main.css": "/static/css/main.aad52914.css",
+    "main.js": "/static/js/main.192e9f8f.js",
     "static/js/453.c7786013.chunk.js": "/static/js/453.c7786013.chunk.js",
     "static/media/vid1de.mp4": "/static/media/vid1de.76c10d5cc383bfc87c02.mp4",
+    "static/media/vid2dm.mp4": "/static/media/vid2dm.fc28bb4723e70fee2489.mp4",
+    "static/media/img1.png": "/static/media/img1.bb4e4b2776217932fdc5.png",
     "static/media/img3.png": "/static/media/img3.c11d01e7e2d21ce83f14.png",
     "static/media/img4.png": "/static/media/img4.5f9a247d705395e79c50.png",
     "static/media/img2.png": "/static/media/img2.c90546a7fe633efaf835.png",
@@ -16,16 +18,31 @@
     "static/media/vDe5.png": "/static/media/vDe5.3aba16b88e2d7b2eeb31.png",
     "static/media/dmp.png": "/static/media/dmp.55a1308f3d3e0ade4bca.png",
     "static/media/dwp.png": "/static/media/dwp.ba449c67c32ede6119a5.png",
+    "static/media/vDm6.png": "/static/media/vDm6.86d594224ef125a6a50b.png",
+    "static/media/icoInstagram.png": "/static/media/icoInstagram.d7fcf737d8a5ba39974d.png",
+    "static/media/vDm11.png": "/static/media/vDm11.9ed6161b62bbff33327c.png",
+    "static/media/Icono.png": "/static/media/Icono.e80b69a277fcf7944846.png",
+    "static/media/vDm9.png": "/static/media/vDm9.9a5912d5aed4b6b276a8.png",
+    "static/media/vDm4.png": "/static/media/vDm4.74de266a43d6bcc777e7.png",
+    "static/media/vDm10.png": "/static/media/vDm10.aa03f79537ec659a631e.png",
+    "static/media/vDm3.png": "/static/media/vDm3.78008ded010ff6eedbd1.png",
+    "static/media/vDm2.png": "/static/media/vDm2.b10a85444f210675120e.png",
+    "static/media/vDm5.png": "/static/media/vDm5.1024e814b2ef0b591aee.png",
+    "static/media/vDm1.png": "/static/media/vDm1.244f2a74acd66b195efb.png",
+    "static/media/vDm8.png": "/static/media/vDm8.c20fb9fab837b5034a1d.png",
     "static/media/vDe3.jpg": "/static/media/vDe3.6e4737050827294fb773.jpg",
+    "static/media/vDm7.png": "/static/media/vDm7.01dd2f2828b7b533e8dd.png",
+    "static/media/IcoWhatsApp.png": "/static/media/IcoWhatsApp.a9920e68004e4b765a67.png",
     "static/media/Oliver.jpg": "/static/media/Oliver.8bc09d6d2b624bfcaf7a.jpg",
+    "static/media/icoGithub.png": "/static/media/icoGithub.e9153af6ac4bd7969b1e.png",
     "static/media/Logo.png": "/static/media/Logo.69e8b1de2e5a4832290d.png",
     "index.html": "/index.html",
-    "main.97bec241.css.map": "/static/css/main.97bec241.css.map",
-    "main.59842a3e.js.map": "/static/js/main.59842a3e.js.map",
+    "main.aad52914.css.map": "/static/css/main.aad52914.css.map",
+    "main.192e9f8f.js.map": "/static/js/main.192e9f8f.js.map",
     "453.c7786013.chunk.js.map": "/static/js/453.c7786013.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.97bec241.css",
-    "static/js/main.59842a3e.js"
+    "static/css/main.aad52914.css",
+    "static/js/main.192e9f8f.js"
   ]
 }
