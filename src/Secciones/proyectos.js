@@ -49,10 +49,10 @@ const proyectosPorEntorno = {
 
 /* ── Cards del grid ── */
 const entornos = [
-    { id: 'web', icon: '🌐', nombre: 'Web', imagen: img('dwp.png'), descripcion: 'Construimos experiencias web modernas, rápidas y escalables.' },
-    { id: 'movil', icon: '📱', nombre: 'Móvil', imagen: img('dmp.png'), descripcion: 'Desarrollamos aplicaciones móviles intuitivas, potentes y multiplataforma.', tieneProyectos: true },
-    { id: 'escritorio', icon: '🖥️', nombre: 'Escritorio', imagen: img('dep.png'), descripcion: 'Creamos aplicaciones de escritorio robustas, eficientes y adaptadas a tus necesidades.', tieneProyectos: true },
-    { id: 'bd', icon: '🗄️', nombre: 'Base de Datos', imagen: img('bdp.png'), descripcion: 'Diseñamos y optimizamos bases de datos seguras, eficientes y escalables.' },
+    { id: 'web', icon: '🌐', nombre: 'Web', imagen: img('dwp.avif'), descripcion: 'Construimos experiencias web modernas, rápidas y escalables.' },
+    { id: 'movil', icon: '📱', nombre: 'Móvil', imagen: img('dmp.avif'), descripcion: 'Desarrollamos aplicaciones móviles intuitivas, potentes y multiplataforma.', tieneProyectos: true },
+    { id: 'escritorio', icon: '🖥️', nombre: 'Escritorio', imagen: img('dep.avif'), descripcion: 'Creamos aplicaciones de escritorio robustas, eficientes y adaptadas a tus necesidades.', tieneProyectos: true },
+    { id: 'bd', icon: '🗄️', nombre: 'Base de Datos', imagen: img('bdp.avif'), descripcion: 'Diseñamos y optimizamos bases de datos seguras, eficientes y escalables.' },
 ];
 
 /* ════ Visor de galería ════ */

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import web from '../Imagenes/img2.png';
-import movil from '../Imagenes/img3.png';
-import escritorio from '../Imagenes/img4.png';
-import basedatos from '../Imagenes/img5.png';
+import web from '../Imagenes/img2.avif';
+import movil from '../Imagenes/img3.avif';
+import escritorio from '../Imagenes/img4.avif';
+import basedatos from '../Imagenes/img5.avif';
 import '../Estilos/servicios.css';
 
 const servicios = [
