@@ -18,12 +18,11 @@ export const proyectosPorEntorno = {
             ],
             color: colorDeepCode, // TODO: reemplazar por el color real de este sistema
             galeria: [
-                { type: 'video', src: img('vid1de.mp4'), label: 'Demo del sistema' },
                 { type: 'img', src: img('vDe1.png'), label: 'Login' },
                 { type: 'img', src: img('vDe2.png'), label: 'Dashboard' },
-                { type: 'img', src: img('vDe3.jpg'), label: 'Clientes' },
-                { type: 'img', src: img('vDe4.png'), label: 'Información personal' },
-                { type: 'img', src: img('vDe5.png'), label: 'Módulo 5' },
+                { type: 'img', src: img('vDe3.jpg'), label: 'Informacion de Clientes' },
+                { type: 'img', src: img('vDe4.png'), label: 'Registro de Clientes' },
+                { type: 'img', src: img('vDe5.png'), label: 'Perfil de Usuario' },
             ],
         },
         // Agrega más proyectos de escritorio aquí
@@ -45,16 +44,16 @@ export const proyectosPorEntorno = {
             color: colorDeepCode, // TODO: reemplazar por el color real de Vitaria
             galeria: [
                 { type: 'img', src: img('vDm1.png'), label: 'Onboarding' },
-                { type: 'img', src: img('vDm2.png'), label: 'Login' },
-                { type: 'img', src: img('vDm3.png'), label: 'Inicio' },
-                { type: 'img', src: img('vDm4.png'), label: 'Especialidades' },
-                { type: 'img', src: img('vDm5.png'), label: 'Perfil de médico' },
-                { type: 'img', src: img('vDm6.png'), label: 'Selección de fecha' },
-                { type: 'img', src: img('vDm7.png'), label: 'Confirmación de cita' },
-                { type: 'img', src: img('vDm8.png'), label: 'Mis citas' },
-                { type: 'img', src: img('vDm9.png'), label: 'Perfil de usuario' },
-                { type: 'img', src: img('vDm10.png'), label: 'Panel admin' },
-                { type: 'img', src: img('vDm11.png'), label: 'Calendario admin' },
+                { type: 'img', src: img('vDm2.png'), label: 'Onboarding' },
+                { type: 'img', src: img('vDm3.png'), label: 'Onboarding' },
+                { type: 'img', src: img('vDm4.png'), label: 'Login' },
+                { type: 'img', src: img('vDm5.png'), label: 'Registro' },
+                { type: 'img', src: img('vDm6.png'), label: 'Inicio' },
+                { type: 'img', src: img('vDm7.png'), label: 'Mis Citas' },
+                { type: 'img', src: img('vDm8.png'), label: 'Perfil de Usuario' },
+                { type: 'img', src: img('vDm9.png'), label: 'Panel Admin' },
+                { type: 'img', src: img('vDm10.png'), label: 'Calendario' },
+                { type: 'img', src: img('vDm11.png'), label: 'Pacientes' },
             ],
         },
         // Agrega más proyectos móviles aquí
