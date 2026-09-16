@@ -1,0 +1,215 @@
+.pl-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(60% 50% at 80% 5%, color-mix(in srgb, var(--acc-to) 20%, transparent), transparent 60%),
+        radial-gradient(50% 45% at 5% 20%, color-mix(in srgb, var(--acc-from) 15%, transparent), transparent 60%),
+        #07070f;
+    color: var(--text-primary);
+}
+
+.pl-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 48px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.pl-logo {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+}
+
+.pl-nav-entorno {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--acc-from);
+    background: color-mix(in srgb, var(--acc-from) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--acc-from) 30%, transparent);
+    padding: 4px 12px;
+    border-radius: 999px;
+}
+
+.pl-hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(40px, 7vh, 90px) 48px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(40px, 6vw, 90px);
+    align-items: center;
+}
+
+/* Columna del dispositivo */
+.pl-device-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.pl-counter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.pl-counter-label {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.pl-counter-num {
+    font-family: monospace;
+    font-size: 0.78rem;
+    color: var(--acc-from);
+    letter-spacing: 0.08em;
+}
+
+/* Columna de texto */
+.pl-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--acc-from);
+    margin-bottom: 0.9rem;
+}
+
+.pl-copy h1 {
+    font-size: clamp(30px, 4.5vw, 46px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--acc-from), var(--acc-to));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.pl-copy p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-bottom: 22px;
+}
+
+.pl-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.pl-tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--acc-from);
+    background: color-mix(in srgb, var(--acc-from) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--acc-from) 30%, transparent);
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+/* Features */
+.pl-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.pl-features li {
+    position: relative;
+    padding-left: 1.6rem;
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.pl-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--acc-from) 18%, transparent);
+    color: var(--acc-from);
+}
+
+/* Stack */
+.pl-stack h4 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.pl-stack-items {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pl-stack-chip {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.pl-stack-chip:hover {
+    border-color: color-mix(in srgb, var(--acc-from) 45%, transparent);
+    transform: translateY(-2px);
+}
+
+/* ═══════════ RESPONSIVE ═══════════ */
+@media (max-width: 900px) {
+    .pl-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .pl-copy p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .pl-tags,
+    .pl-stack-items {
+        justify-content: center;
+    }
+
+    .pl-features {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+
+    .pl-nav {
+        padding: 18px 20px;
+    }
+}

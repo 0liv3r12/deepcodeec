@@ -1,253 +1,137 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { img } from '../utils/imageLoader';
+import React, { useState } from 'react';
+import { proyectosPorEntorno, entornos as entornosData } from '../Data/proyectosData';
 import '../Estilos/proyectos.css';
 
-/* ── Proyectos por entorno ── */
-const proyectosPorEntorno = {
-    escritorio: [
-        {
-            id: 1,
-            icon: '🖥️',
-            nombre: 'Sistema CRUD',
-            tags: ['JavaScript', 'MySQL', 'CRUD', 'Dashboard'],
-            galeria: [
-                { type: 'video', src: img('vid1de.mp4'), label: 'Demo del sistema' },
-                { type: 'img', src: img('vDe1.png'), label: 'Login' },
-                { type: 'img', src: img('vDe2.png'), label: 'Dashboard' },
-                { type: 'img', src: img('vDe3.jpg'), label: 'Clientes' },
-                { type: 'img', src: img('vDe4.png'), label: 'Información personal' },
-                { type: 'img', src: img('vDe5.png'), label: 'Módulo 5' },
-                { type: 'img', src: img('vDe6.png'), label: 'Módulo 6' },
-            ],
-        },
-        // Agrega más proyectos de escritorio aquí
-    ],
-    movil: [
-        {
-            id: 1,
-            icon: '📱',
-            nombre: 'Vitaria',
-            tags: ['Flutter', 'Dart', 'Citas Médicas', 'UI/UX'],
-            galeria: [
-                { type: 'video', src: img('vid2dm.mp4'), label: 'Demo de la app' },
-                { type: 'img', src: img('vDm1.png'), label: 'Onboarding' },
-                { type: 'img', src: img('vDm2.png'), label: 'Login' },
-                { type: 'img', src: img('vDm3.png'), label: 'Inicio' },
-                { type: 'img', src: img('vDm4.png'), label: 'Especialidades' },
-                { type: 'img', src: img('vDm5.png'), label: 'Perfil de médico' },
-                { type: 'img', src: img('vDm6.png'), label: 'Selección de fecha' },
-                { type: 'img', src: img('vDm7.png'), label: 'Confirmación de cita' },
-                { type: 'img', src: img('vDm8.png'), label: 'Mis citas' },
-                { type: 'img', src: img('vDm9.png'), label: 'Perfil de usuario' },
-                { type: 'img', src: img('vDm10.png'), label: 'Panel admin' },
-                { type: 'img', src: img('vDm11.png'), label: 'Calendario admin' },
-            ],
-        },
-        // Agrega más proyectos móviles aquí
-    ],
-};
+/* ── Iconos propios (line icons, sin emoji) ── */
+const IconWeb = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+        <rect x="3" y="4.5" width="18" height="14" rx="2" /><path d="M3 8.5h18" />
+    </svg>
+);
+const IconMovil = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+        <rect x="7" y="2.5" width="10" height="19" rx="2.2" />
+    </svg>
+);
+const IconEscritorio = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+        <rect x="3" y="4" width="18" height="12" rx="1.6" /><path d="M9 20h6M12 16v4" />
+    </svg>
+);
+const IconBD = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+        <ellipse cx="12" cy="5.5" rx="7" ry="2.5" />
+        <path d="M5 5.5V18.5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V5.5" />
+        <path d="M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5" />
+    </svg>
+);
 
-/* ── Cards del grid ── */
-const entornos = [
-    { id: 'web', icon: '🌐', nombre: 'Web', imagen: img('dwp.avif'), descripcion: 'Construimos experiencias web modernas, rápidas y escalables.' },
-    { id: 'movil', icon: '📱', nombre: 'Móvil', imagen: img('dmp.avif'), descripcion: 'Desarrollamos aplicaciones móviles intuitivas, potentes y multiplataforma.', tieneProyectos: true },
-    { id: 'escritorio', icon: '🖥️', nombre: 'Escritorio', imagen: img('dep.avif'), descripcion: 'Creamos aplicaciones de escritorio robustas, eficientes y adaptadas a tus necesidades.', tieneProyectos: true },
-    { id: 'bd', icon: '🗄️', nombre: 'Base de Datos', imagen: img('bdp.avif'), descripcion: 'Diseñamos y optimizamos bases de datos seguras, eficientes y escalables.' },
+const iconosPorEntorno = { web: IconWeb, movil: IconMovil, escritorio: IconEscritorio, bd: IconBD };
+
+const proceso = [
+    'Empezamos por entender el negocio, no por escribir código.',
+    'Diseñamos la interfaz y la validamos antes de construir.',
+    'Desarrollamos con buenas prácticas: código limpio y escalable.',
+    'Entregamos en producción y acompañamos el crecimiento.',
 ];
 
-/* ════ Visor de galería ════ */
-const Visor = ({ proyecto }) => {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [isVertical, setIsVertical] = useState(false);
-    const items = proyecto.galeria;
-    const current = items[activeIndex];
-
-    const prev = useCallback(() =>
-        setActiveIndex(i => (i - 1 + items.length) % items.length), [items.length]);
-    const next = useCallback(() =>
-        setActiveIndex(i => (i + 1) % items.length), [items.length]);
-
-    useEffect(() => { setActiveIndex(0); }, [proyecto.id]);
-
-    useEffect(() => {
-        const vid = document.getElementById('visor-video');
-        if (vid) vid.load();
-    }, [activeIndex]);
-
-    // Detecta si el media activo es vertical (retrato) u horizontal
-    useEffect(() => {
-        if (current.type === 'img') {
-            const img = new Image();
-            img.onload = () => setIsVertical(img.naturalHeight > img.naturalWidth);
-            img.src = current.src;
-        } else {
-            // Para video, esperamos metadata
-            setIsVertical(false);
-        }
-    }, [current]);
-
-    const handleVideoMeta = (e) => {
-        const v = e.target;
-        setIsVertical(v.videoHeight > v.videoWidth);
-    };
-
-    return (
-        <div className="visor-wrapper">
-            {/* Tags */}
-            {proyecto.tags && (
-                <div className="visor-tags">
-                    {proyecto.tags.map(t => (
-                        <span key={t} className="visor-tag">{t}</span>
-                    ))}
-                </div>
-            )}
-
-            {/* Media principal */}
-            <div className={`visor-media-wrap ${isVertical ? 'is-vertical' : ''}`}>
-                <button className="visor-arrow visor-arrow-left" onClick={prev}>‹</button>
-                <div className="visor-media">
-                    {current.type === 'video' ? (
-                        <video
-                            id="visor-video"
-                            controls
-                            playsInline
-                            preload="metadata"
-                            onLoadedMetadata={handleVideoMeta}
-                        >
-                            <source src={current.src} type="video/mp4" />
-                        </video>
-                    ) : (
-                        <img src={current.src} alt={current.label} />
-                    )}
-                </div>
-                <button className="visor-arrow visor-arrow-right" onClick={next}>›</button>
-            </div>
-
-            {/* Contador */}
-            <div className="visor-counter">
-                {current.label} · {activeIndex + 1} / {items.length}
-            </div>
-
-            {/* Miniaturas */}
-            <div className="visor-thumbs">
-                {items.map((item, i) => (
-                    <button
-                        key={i}
-                        className={`visor-thumb ${activeIndex === i ? 'active' : ''}`}
-                        onClick={() => setActiveIndex(i)}
-                        title={item.label}
-                    >
-                        {item.type === 'video'
-                            ? <div className="visor-thumb-video">▶</div>
-                            : <img src={item.src} alt={item.label} />
-                        }
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-/* ════ Modal con tabs de proyectos ════ */
-const ModalProyectos = ({ entornoId, entornoNombre, onClose }) => {
-    const lista = proyectosPorEntorno[entornoId] || [];
-    const [activeProyecto, setActiveProyecto] = useState(lista[0]);
-
-    useEffect(() => {
-        const handler = (e) => { if (e.key === 'Escape') onClose(); };
-        window.addEventListener('keydown', handler);
-        return () => window.removeEventListener('keydown', handler);
-    }, [onClose]);
-
-    return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-galeria" onClick={e => e.stopPropagation()}>
-
-                {/* Header */}
-                <div className="mg-header">
-                    <h3 className="mg-titulo">Proyectos de {entornoNombre}</h3>
-                    <button className="mg-close" onClick={onClose}>✕</button>
-                </div>
-
-                {/* Tabs horizontales */}
-                <div className="mg-tabs">
-                    {lista.map(p => (
-                        <button
-                            key={p.id}
-                            className={`mg-tab ${activeProyecto?.id === p.id ? 'active' : ''}`}
-                            onClick={() => setActiveProyecto(p)}
-                        >
-                            <span>{p.icon}</span>
-                            {p.nombre}
-                        </button>
-                    ))}
-                    {/* Próximos proyectos */}
-                    <button className="mg-tab proximamente" disabled>
-                        <span>➕</span>
-                        Próximamente
-                    </button>
-                </div>
-
-                {/* Visor */}
-                {activeProyecto && (
-                    <Visor key={activeProyecto.id} proyecto={activeProyecto} />
-                )}
-            </div>
-        </div>
-    );
-};
-
-/* ════ Componente principal ════ */
 const Proyectos = () => {
-    const [modalEntorno, setModalEntorno] = useState(null);
+    const entornos = entornosData.map(e => {
+        const lista = proyectosPorEntorno[e.id] || [];
+        return { ...e, Icon: iconosPorEntorno[e.id], lista, count: lista.length };
+    });
+
+    const [entornoActivo, setEntornoActivo] = useState(
+        entornos.find(e => e.count > 0)?.id || entornos[0].id
+    );
+
+    const entorno = entornos.find(e => e.id === entornoActivo);
 
     return (
         <section id="proyectos">
-            <div className="proyectos-header animate-on-scroll">
+            <div className="proyectos-header">
                 <span className="section-label">Portafolio</span>
                 <h2 className="section-title">
-                    Lo que <span className="gradient-text">construimos</span>
+                    Software construido <span className="gradient-text">para negocios reales.</span>
                 </h2>
                 <p className="section-subtitle">
-                    Cada entorno, una solución. Haz clic para ver la vista completa.
+                    Aplicaciones web, móviles y de escritorio desarrolladas de punta a punta.
                 </p>
             </div>
 
             <div className="showcase-wrapper">
-                <div className="proyectos-grid">
-                    {entornos.map((e, i) => (
-                        <div
-                            key={e.id}
-                            className="proyecto-card animate-on-scroll"
-                            style={{ transitionDelay: `${i * 0.08}s` }}
-                        >
-                            <img src={e.imagen} alt={e.nombre} className="proyecto-img" />
-                            <div className="proyecto-gradient" />
-                            <div className="proyecto-content">
-                                <div className="proyecto-icon">{e.icon}</div>
-                                <h3 className="proyecto-nombre">{e.nombre}</h3>
-                                <p className="proyecto-descripcion">{e.descripcion}</p>
-                                {e.tieneProyectos && (
-                                    <button
-                                        className="proyecto-btn"
-                                        onClick={() => setModalEntorno(e)}
-                                    >
-                                        Ver proyectos →
-                                    </button>
-                                )}
-                            </div>
+                <div className="ph-hero">
+
+                    {/* ═══ IZQUIERDA: tabs de entorno + proyectos ═══ */}
+                    <div className="ph-left">
+                        <div className="ph-entorno-tabs">
+                            {entornos.map(e => (
+                                <button
+                                    key={e.id}
+                                    className={`ph-entorno-tab ${entornoActivo === e.id ? 'active' : ''}`}
+                                    onClick={() => setEntornoActivo(e.id)}
+                                >
+                                    <span className="ph-tab-icon"><e.Icon /></span>
+                                    {e.nombre}
+                                </button>
+                            ))}
                         </div>
-                    ))}
+
+                        <div className="ph-proyectos" key={entornoActivo}>
+                            {entorno.count === 0 ? (
+                                <div className="ph-proyectos-vacio">
+                                    Todavía no hay proyectos en {entorno.nombre}.
+                                    <span>Próximamente</span>
+                                </div>
+                            ) : (
+                                entorno.lista.map(p => (
+                                    <a
+                                        key={p.id}
+                                        className="ph-proyecto"
+                                        href={`/proyecto/${entorno.id}/${p.id}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <div className="ph-proyecto-media">
+                                            <img src={p.galeria[1]?.src || p.galeria[0]?.src} alt={p.nombre} loading="lazy" />
+                                        </div>
+                                        <div className="ph-proyecto-info">
+                                            <h5>{p.nombre}</h5>
+                                            <span className="ph-proyecto-cta">Ver proyecto ↗</span>
+                                        </div>
+                                    </a>
+                                ))
+                            )}
+                        </div>
+                    </div>
+
+                    {/* ═══ DERECHA: proceso + tarjetas de número ═══ */}
+                    <div className="ph-right">
+                        <div className="ph-proceso">
+                            <h3>Cómo trabajamos</h3>
+                            <ul>
+                                {proceso.map((p, i) => <li key={i}>{p}</li>)}
+                            </ul>
+                        </div>
+
+                        <div className="ph-nums">
+                            {entornos.map(e => (
+                                <div key={e.id} className={`ph-num ${e.count === 0 ? 'vacio' : ''}`}>
+                                    <div className="ph-num-head">
+                                        <span className="ph-tab-icon sm"><e.Icon /></span>
+                                        {e.nombre}
+                                    </div>
+                                    <div className="ph-num-count">{String(e.count).padStart(2, '0')}</div>
+                                    <div className="ph-num-label">
+                                        {e.count === 0 ? 'Próximamente' : e.count === 1 ? 'proyecto' : 'proyectos'}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                 </div>
             </div>
-
-            {modalEntorno && (
-                <ModalProyectos
-                    entornoId={modalEntorno.id}
-                    entornoNombre={modalEntorno.nombre}
-                    onClose={() => setModalEntorno(null)}
-                />
-            )}
         </section>
     );
 };
