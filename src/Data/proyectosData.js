@@ -1,17 +1,15 @@
 import { img } from '../utils/imageLoader';
-
-/* Color de acento por proyecto — si no se especifica, usa el de DeepCode (cian→violeta).
-   Ajusta 'from'/'to' al color real de marca de cada app cuando lo tengas. */
 const colorDeepCode = { from: '#38b6ff', to: '#8b5cf6' };
 
 export const proyectosPorEntorno = {
     escritorio: [
         {
             id: 1,
-            nombre: 'Sistema CRUD',
+            nombre: 'KORE',
             titular: 'Gestión de clientes, ordenada.',
             descripcion: 'Sistema de escritorio para administrar clientes, contratos e información operativa desde un panel central.',
             tags: ['JavaScript', 'MySQL', 'CRUD', 'Dashboard'],
+            portada: img('iconKore.avif'),
             stack: ['JavaScript', 'MySQL', 'Electron'],
             features: [
                 'Gestión completa de clientes y contratos',
@@ -37,6 +35,7 @@ export const proyectosPorEntorno = {
             titular: 'Tu salud, en tus manos.',
             descripcion: 'Vitaria conecta pacientes con especialistas médicos: agenda de citas, recordatorios automáticos y seguimiento, todo desde el celular.',
             tags: ['Flutter', 'Dart', 'Citas Médicas', 'UI/UX'],
+            portada: img('iconVitaria.avif'), 
             stack: ['Flutter', 'Dart', 'Firebase'],
             features: [
                 'Agenda de citas con especialistas médicos',

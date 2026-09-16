@@ -274,10 +274,6 @@
         padding: 1.5rem 0;
     }
 
-    .image-content {
-        order: -1;
-    }
-
     .hero-title {
         font-size: clamp(1.9rem, 7vw, 2.6rem);
     }

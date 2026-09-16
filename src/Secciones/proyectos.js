@@ -93,7 +93,7 @@ const Proyectos = () => {
                                         rel="noopener noreferrer"
                                     >
                                         <div className="ph-proyecto-media">
-                                            <img src={p.galeria[1]?.src || p.galeria[0]?.src} alt={p.nombre} loading="lazy" />
+                                            <img src={p.portada || p.galeria[1]?.src || p.galeria[0]?.src} alt={p.nombre} loading="lazy" />
                                         </div>
                                         <div className="ph-proyecto-info">
                                             <h5>{p.nombre}</h5>
