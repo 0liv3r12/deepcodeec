@@ -34,7 +34,7 @@ export const proyectosPorEntorno = {
             titular: 'Tu salud, en tus manos.',
             descripcion: 'Vitaria conecta pacientes con especialistas médicos: agenda de citas, recordatorios automáticos y seguimiento, todo desde el celular.',
             tags: ['Flutter', 'Dart', 'Citas Médicas', 'UI/UX'],
-            portada: img('iconVitaria.avif'), 
+            portada: img('iconVitaria.avif'),
             stack: ['Flutter', 'Dart', 'Firebase'],
             features: [
                 'Agenda de citas con especialistas médicos',
@@ -58,7 +58,35 @@ export const proyectosPorEntorno = {
         },
         // Agrega más proyectos móviles aquí
     ],
-    web: [],
+    web: [
+        {
+            id: 1,
+            nombre: 'Ambre',
+            titular: 'Tu restaurante, servido en digital.',
+            descripcion: 'Sitio web completo para restaurantes: menú digital, reservas online con confirmación automática, métodos de pago y un panel de administración para que el dueño gestione todo sin depender de un desarrollador.',
+            tags: ['React', 'Node.js', 'Reservas Online', 'Panel Admin'],
+            portada: img('Ambre-logo.avif'),
+            stack: ['React', 'Express', 'Prisma', 'SQLite'],
+            features: [
+                'Reservas online con confirmación automática por WhatsApp',
+                'Menú digital, eventos y selección de métodos de pago',
+                'Panel de administración para gestionar todo el contenido',
+            ],
+            color: { from: '#c9a227', to: '#f5c451' }, // paleta dorada real de Ambre
+            galeria: [
+                { type: 'img', src: img('inicio.avif'), label: 'Inicio' },
+                { type: 'img', src: img('menu.avif'), label: 'Menu' },
+                { type: 'img', src: img('proximos-eventos.avif'), label: 'Proximos Eventos' },
+                { type: 'img', src: img('Eventos-Hecho.avif'), label: 'Eventos Hechos Realidad' },
+                { type: 'img', src: img('servicios.avif'), label: 'Servicios' },
+                { type: 'img', src: img('reserva.avif'), label: 'Reserva' },
+                { type: 'img', src: img('reserva-hecha.avif'), label: 'Reserva Hecha' },
+                { type: 'img', src: img('ubicanos.avif'), label: 'Ubicanos' },
+                
+            ],
+        },
+        // Agrega más proyectos web aquí
+    ],
     bd: [],
 };
 
