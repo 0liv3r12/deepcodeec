@@ -1,17 +1,21 @@
 {
   "files": {
     "main.css": "/static/css/main.b95a6c00.css",
-    "main.js": "/static/js/main.83014908.js",
-    "static/js/453.c7786013.chunk.js": "/static/js/453.c7786013.chunk.js",
+    "main.js": "/static/js/main.6d30506b.js",
+    "static/js/453.9a39d6c2.chunk.js": "/static/js/453.9a39d6c2.chunk.js",
     "static/media/vDe4.png": "/static/media/vDe4.2da0083d4fc0adcd78ca.png",
     "static/media/vDe1.png": "/static/media/vDe1.3e6b4d58e9b8124f558e.png",
     "static/media/vDe2.png": "/static/media/vDe2.99a0a82a91357c216bd3.png",
     "static/media/vDe5.png": "/static/media/vDe5.3aba16b88e2d7b2eeb31.png",
+    "static/media/menu.avif": "/static/media/menu.77dc927cc126667c09d5.avif",
+    "static/media/Eventos-Hecho.avif": "/static/media/Eventos-Hecho.f9ab7e5da25c0bdf696b.avif",
     "static/media/icoInstagram.png": "/static/media/icoInstagram.d7fcf737d8a5ba39974d.png",
     "static/media/Icono.png": "/static/media/Icono.e80b69a277fcf7944846.png",
     "static/media/vDm6.png": "/static/media/vDm6.052d40f72006882b51b1.png",
+    "static/media/ubicanos.avif": "/static/media/ubicanos.5b50c9f2d918c4e8b915.avif",
     "static/media/vDm11.png": "/static/media/vDm11.e77e2cae6a9b54b0d007.png",
     "static/media/vDe3.jpg": "/static/media/vDe3.6e4737050827294fb773.jpg",
+    "static/media/proximos-eventos.avif": "/static/media/proximos-eventos.76e1245dec5d0ab22c69.avif",
     "static/media/vDm9.png": "/static/media/vDm9.a539d2c749690c294599.png",
     "static/media/IcoWhatsApp.png": "/static/media/IcoWhatsApp.a9920e68004e4b765a67.png",
     "static/media/vDm3.png": "/static/media/vDm3.cb9e28c5ef11c5a8ac88.png",
@@ -22,11 +26,16 @@
     "static/media/vDm1.png": "/static/media/vDm1.d39b7d4ad0ca4cb48828.png",
     "static/media/icoGithub.png": "/static/media/icoGithub.e9153af6ac4bd7969b1e.png",
     "static/media/vDm5.png": "/static/media/vDm5.97f10cd4f24a404dabd8.png",
+    "static/media/servicios.avif": "/static/media/servicios.7fc7011390a33c217712.avif",
     "static/media/vDm8.png": "/static/media/vDm8.d0b94a4823aa7f71d148.png",
     "static/media/img3.avif": "/static/media/img3.80b4e618caf7545bdf33.avif",
     "static/media/img4.avif": "/static/media/img4.d48d8ebb569a26a7ab4e.avif",
+    "static/media/reserva-hecha.avif": "/static/media/reserva-hecha.5543134566c6b54a370a.avif",
+    "static/media/inicio.avif": "/static/media/inicio.1b29ff7471cba9d4dc53.avif",
     "static/media/vDm7.png": "/static/media/vDm7.a3ff16fee16b15edfd81.png",
+    "static/media/reserva-hecha (1).avif": "/static/media/reserva-hecha (1).748ce5e379b0fa6860d7.avif",
     "static/media/img2.avif": "/static/media/img2.a4a76e1f4570668e5ab4.avif",
+    "static/media/reserva.avif": "/static/media/reserva.f5759a86a153632164aa.avif",
     "static/media/Logo.png": "/static/media/Logo.69e8b1de2e5a4832290d.png",
     "static/media/img5.avif": "/static/media/img5.2ea204908aaee7768adf.avif",
     "static/media/iconCRUD.avif": "/static/media/iconCRUD.aa346302e857d4c9ead9.avif",
@@ -36,13 +45,14 @@
     "static/media/bdp.avif": "/static/media/bdp.656699436ec4feba9427.avif",
     "static/media/dwp.avif": "/static/media/dwp.b04c5269f25e2b9a70aa.avif",
     "static/media/dmp.avif": "/static/media/dmp.801bfc511520535c007c.avif",
+    "static/media/Ambre-logo.avif": "/static/media/Ambre-logo.039f21ee9a619cf2c257.avif",
     "index.html": "/index.html",
     "main.b95a6c00.css.map": "/static/css/main.b95a6c00.css.map",
-    "main.83014908.js.map": "/static/js/main.83014908.js.map",
-    "453.c7786013.chunk.js.map": "/static/js/453.c7786013.chunk.js.map"
+    "main.6d30506b.js.map": "/static/js/main.6d30506b.js.map",
+    "453.9a39d6c2.chunk.js.map": "/static/js/453.9a39d6c2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b95a6c00.css",
-    "static/js/main.83014908.js"
+    "static/js/main.6d30506b.js"
   ]
 }
