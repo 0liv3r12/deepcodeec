@@ -4,6 +4,7 @@ import { proyectosPorEntorno, entornos } from '../Data/proyectosData';
 import MarcoPhone from '../Componentes/marcoPhone';
 import MarcoDesktop from '../Componentes/marcoDesktop';
 import '../Estilos/proyectoLanding.css';
+import logo from '../Imagenes/Logo.png';
 
 const ProyectoLanding = () => {
     const { entornoId, proyectoId } = useParams();
@@ -50,7 +51,7 @@ const ProyectoLanding = () => {
     return (
         <div className="pl-page" style={{ '--acc-from': color.from, '--acc-to': color.to }}>
             <nav className="pl-nav">
-                <span className="pl-logo">DEEP CODE</span>
+                <img src={logo} alt="DeepCode" className="pl-logo" />
                 <span className="pl-nav-entorno">{entorno.nombre}</span>
             </nav>
 

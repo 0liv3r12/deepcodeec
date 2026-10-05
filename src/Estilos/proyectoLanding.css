@@ -16,10 +16,13 @@
 }
 
 .pl-logo {
-    font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.02em;
-    color: var(--text-secondary);
+    height: 28px;
+    width: auto;
+}
+
+.pl-logo:hover {
+    filter: drop-shadow(0 0 12px var(--accent-blue));
+    transition: filter 0.3s ease;
 }
 
 .pl-nav-entorno {
