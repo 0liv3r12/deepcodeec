@@ -1,5 +1,5 @@
 import { img } from '../utils/imageLoader';
-const colorDeepCode = { from: '#38b6ff', to: '#8b5cf6' };
+export const colorDeepCode = { from: '#38b6ff', to: '#8b5cf6' };
 
 export const proyectosPorEntorno = {
     escritorio: [
@@ -96,3 +96,16 @@ export const entornos = [
     { id: 'escritorio', nombre: 'Escritorio', dispositivo: 'computer' },
     { id: 'bd', nombre: 'Base de Datos', dispositivo: 'computer' },
 ];
+
+/* Cada entorno con su lista de proyectos ya resuelta. */
+export const entornosConProyectos = entornos.map(e => ({
+    ...e,
+    lista: proyectosPorEntorno[e.id] || [],
+}));
+
+/* Devuelve { entorno, proyecto } o null si la URL no corresponde a ninguno. */
+export const buscarProyecto = (entornoId, proyectoId) => {
+    const entorno = entornosConProyectos.find(e => e.id === entornoId);
+    const proyecto = entorno?.lista.find(p => String(p.id) === proyectoId);
+    return entorno && proyecto ? { entorno, proyecto } : null;
+};
