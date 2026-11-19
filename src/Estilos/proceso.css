@@ -1,0 +1,216 @@
+#proceso {
+    padding: clamp(4rem, 8vh, 7rem) clamp(1.5rem, 5vw, 6rem);
+}
+
+.proceso-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.proceso-header .section-title {
+    text-wrap: balance;
+}
+
+.proceso-header .section-subtitle {
+    margin: 0 auto;
+}
+
+/* ── Línea de tiempo ── */
+.proceso-cuerpo {
+    position: relative;
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+/* Riel gris y progreso azul, centrados con los puntos (left 23px = 12 + 24/2 − 1) */
+.proceso-riel,
+.proceso-progreso {
+    position: absolute;
+    left: 23px;
+    top: var(--space-2);
+    bottom: var(--space-2);
+    width: 2px;
+    border-radius: 2px;
+}
+
+.proceso-riel {
+    background: var(--border);
+}
+
+.proceso-progreso {
+    background: linear-gradient(var(--brand-ice), var(--brand-blue));
+    box-shadow: 0 0 12px var(--glow-blue);
+    transform-origin: top;
+    /* respaldo (IntersectionObserver): avanza paso a paso */
+    transform: scaleY(var(--progreso, 0));
+    transition: transform var(--dur-3) var(--ease);
+}
+
+.proceso-linea {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+}
+
+.proceso-paso {
+    position: relative;
+    padding-left: 72px;
+    opacity: 0.4;
+    transition: opacity var(--dur-3) var(--ease);
+}
+
+.proceso-paso.is-activo {
+    opacity: 1;
+}
+
+.proceso-punto {
+    position: absolute;
+    left: 12px;
+    top: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg-base);
+    border: 2px solid var(--border-hover);
+}
+
+/* El punto "se enciende" */
+.proceso-punto::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--accent-blue);
+    box-shadow: 0 0 16px var(--glow-blue);
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity var(--dur-3) var(--ease), transform var(--dur-3) var(--ease);
+}
+
+.proceso-paso.is-activo .proceso-punto::after {
+    opacity: 1;
+    transform: none;
+}
+
+.proceso-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--accent-blue);
+    margin-bottom: 4px;
+}
+
+.proceso-paso h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+}
+
+.proceso-paso p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    max-width: 520px;
+}
+
+/* ── Scroll-driven: la línea se dibuja con el scroll y cada paso se enciende
+   cuando su borde superior cruza el 60% de la pantalla. ── */
+@supports (animation-timeline: view()) {
+    .proceso-progreso {
+        transition: none;
+        animation: dc-linea linear both;
+        animation-timeline: view();
+        /* empieza cuando el tope de la línea llega al 60% de la pantalla
+           y termina cuando llega su final */
+        animation-range: cover 40vh entry calc(100% + 40vh);
+    }
+
+    .proceso-paso {
+        view-timeline-name: --paso;
+        transition: none;
+        animation: dc-encender linear both;
+        animation-timeline: --paso;
+        animation-range: cover 40vh cover calc(40vh + 80px);
+    }
+
+    .proceso-punto::after {
+        transition: none;
+        animation: dc-punto linear both;
+        animation-timeline: --paso;
+        animation-range: cover 40vh cover calc(40vh + 80px);
+    }
+}
+
+@keyframes dc-linea {
+    from {
+        transform: scaleY(0);
+    }
+
+    to {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes dc-encender {
+    from {
+        opacity: 0.4;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes dc-punto {
+    from {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Sin movimiento: todo encendido y la línea completa */
+@media (prefers-reduced-motion: reduce) {
+    .proceso-progreso,
+    .proceso-paso,
+    .proceso-punto::after {
+        animation: none !important;
+    }
+
+    .proceso-progreso {
+        transform: none !important;
+    }
+
+    .proceso-paso {
+        opacity: 1 !important;
+    }
+
+    .proceso-punto::after {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #proceso {
+        padding: var(--space-10) var(--space-3);
+    }
+
+    .proceso-paso {
+        padding-left: 56px;
+    }
+
+    .proceso-linea {
+        gap: var(--space-5);
+    }
+}

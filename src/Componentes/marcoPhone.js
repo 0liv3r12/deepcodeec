@@ -3,9 +3,9 @@ import '../Estilos/marcos.css';
 
 /* Marco de celular dibujado en CSS (no imagen), con notch y botones laterales.
    'children' es el contenido de la pantalla (imagen/video del carrusel). */
-const MarcoPhone = ({ children }) => {
+const MarcoPhone = ({ children, style }) => {
     return (
-        <div className="marco-phone">
+        <div className="marco-phone" style={style}>
             <div className="marco-phone-btn marco-phone-btn-volume" />
             <div className="marco-phone-btn marco-phone-btn-power" />
             <div className="marco-phone-body">

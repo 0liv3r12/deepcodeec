@@ -1,159 +1,147 @@
-import React, { useState, useEffect } from 'react';
-import web from '../Imagenes/img2.avif';
-import movil from '../Imagenes/img3.avif';
-import escritorio from '../Imagenes/img4.avif';
-import basedatos from '../Imagenes/img5.avif';
+import React from 'react';
+import { whatsapp } from '../Data/contacto';
 import '../Estilos/servicios.css';
+
+/* Íconos de línea dentro de los corchetes de marca < >. Todos con el mismo
+   trazo; `pathLength="1"` permite "dibujarlos" con stroke-dashoffset al hover. */
+const trazo = { pathLength: 1, className: 'icono-trazo' };
+
+const figuras = {
+    movil: (
+        <>
+            <rect x="23" y="6" width="18" height="28" rx="3.5" {...trazo} />
+            <path d="M29 29.5h6" {...trazo} />
+        </>
+    ),
+    web: (
+        <>
+            <rect x="17" y="8" width="30" height="24" rx="3" {...trazo} />
+            <path d="M17 14h30" {...trazo} />
+            <path d="M22 20h12M22 25h8" {...trazo} />
+        </>
+    ),
+    escritorio: (
+        <>
+            <rect x="18" y="7" width="28" height="19" rx="2.5" {...trazo} />
+            <path d="M32 26v5M26 32.5h12" {...trazo} />
+        </>
+    ),
+    bd: (
+        <>
+            <ellipse cx="32" cy="10.5" rx="10" ry="3.5" {...trazo} />
+            <path d="M22 10.5v19c0 1.9 4.5 3.5 10 3.5s10-1.6 10-3.5v-19" {...trazo} />
+            <path d="M22 20c0 1.9 4.5 3.5 10 3.5s10-1.6 10-3.5" {...trazo} />
+        </>
+    ),
+};
+
+const IconoServicio = ({ id }) => (
+    <svg className="servicio-icono" viewBox="0 0 64 40" fill="none" aria-hidden="true">
+        <path d="M12 9 4 20l8 11" className="icono-corchete" {...trazo} />
+        <path d="M52 9l8 11-8 11" className="icono-corchete" {...trazo} />
+        {figuras[id]}
+    </svg>
+);
 
 const servicios = [
     {
-        id: 0,
-        icon: '📱',
+        id: 'movil',
         title: 'App Móvil',
-        highlight: 'Android e iOS',
-        descripcion: 'Tu negocio en el bolsillo de tus clientes. Aplicaciones nativas y multiplataforma con Flutter y React Native que funcionan rápido, se ven bien y escalan con tu empresa.',
-        imagen: movil,
+        beneficio: 'Tu negocio en el bolsillo de tus clientes.',
         features: [
             'Notificaciones en tiempo real',
             'GPS, cámara y pagos integrados',
-            'Funciona sin conexión (modo offline)',
+            'Funciona sin conexión',
             'Publicación en Play Store y App Store',
         ],
+        stack: ['Flutter', 'React Native'],
+        mensaje: 'Hola DeepCodeEc, quiero cotizar una app móvil.',
     },
     {
-        id: 1,
-        icon: '🌐',
+        id: 'web',
         title: 'Sitio Web',
-        highlight: 'Rápido y responsivo',
-        descripcion: 'Desde una landing page hasta un sistema completo. Construido con React para que cargue rápido, se vea bien en cualquier dispositivo y sea fácil de actualizar.',
-        imagen: web,
+        beneficio: 'Tus clientes reservan y pagan solos.',
         features: [
-            'Diseño adaptado a celular, tablet y PC',
+            'Se adapta a celular, tablet y PC',
             'SEO técnico desde la base',
             'Formularios, chat y páginas de pago',
             'Fácil de actualizar sin tocar código',
         ],
+        stack: ['React', 'Node.js'],
+        mensaje: 'Hola DeepCodeEc, quiero cotizar un sitio web.',
     },
     {
-        id: 2,
-        icon: '🖥️',
+        id: 'escritorio',
         title: 'Software de Escritorio',
-        highlight: 'Para tu operación interna',
-        descripcion: 'Sistemas que corren directo en tu computadora, sin depender de internet. Inventario, facturación, reportes y control interno adaptados exactamente a tu flujo de trabajo.',
-        imagen: escritorio,
+        beneficio: 'Tu operación interna bajo control, aunque se caiga el internet.',
         features: [
             'Inventario y control de stock',
             'Facturación y reportes automáticos',
-            'Gestión de usuarios y permisos',
-            'Integración con impresoras y dispositivos',
+            'Usuarios y permisos',
+            'Conexión con impresoras y dispositivos',
         ],
+        stack: ['Electron', 'JavaScript', 'MySQL'],
+        mensaje: 'Hola DeepCodeEc, quiero cotizar un software de escritorio.',
     },
     {
-        id: 3,
-        icon: '🗄️',
+        id: 'bd',
         title: 'Base de Datos',
-        highlight: 'Tu información, organizada',
-        descripcion: 'Diseñamos la estructura de datos correcta desde el principio para que tu sistema no colapse cuando crezca. PostgreSQL, MySQL, MongoDB o Firebase según lo que necesites.',
-        imagen: basedatos,
+        beneficio: 'Tu información ordenada y lista para crecer.',
         features: [
-            'Estructura optimizada para escalar',
-            'Respaldos automáticos configurados',
+            'Estructura pensada para escalar',
+            'Respaldos automáticos',
             'Consultas rápidas aunque el volumen crezca',
-            'Seguridad y control de acceso por rol',
+            'Acceso controlado por rol',
         ],
+        stack: ['PostgreSQL', 'MySQL', 'MongoDB', 'Firebase'],
+        mensaje: 'Hola DeepCodeEc, quiero cotizar una base de datos.',
     },
 ];
 
-const Servicios = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [panelKey, setPanelKey] = useState(0);
+const Servicios = () => (
+    <section id="entornos">
+        <div className="entornos-header">
+            <span className="section-label" data-reveal>Servicios</span>
+            <h2 className="section-title" data-reveal>
+                Una solución para cada parte <span className="gradient-text">de tu negocio.</span>
+            </h2>
+            <p className="section-subtitle" data-reveal>
+                Web, móvil, escritorio o datos: lo construyo de la idea a producción
+                para que trabaje por ti.
+            </p>
+        </div>
 
-    const handleSelect = (index) => {
-        if (index === activeIndex) return;
-        setActiveIndex(index);
-        setPanelKey(prev => prev + 1);
-    };
+        <div className="servicios-grid">
+            {servicios.map((s) => (
+                <article key={s.id} className="servicio-card" data-reveal data-spotlight data-tilt>
+                    <IconoServicio id={s.id} />
+                    <h3 className="servicio-titulo">{s.title}</h3>
+                    <p className="servicio-beneficio">{s.beneficio}</p>
 
-    // Auto-avance cada 6s si el usuario no interactúa
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setActiveIndex(prev => {
-                const next = (prev + 1) % servicios.length;
-                setPanelKey(k => k + 1);
-                return next;
-            });
-        }, 6000);
-        return () => clearInterval(timer);
-    }, []);
+                    <ul className="servicio-features">
+                        {s.features.map((f) => <li key={f}>{f}</li>)}
+                    </ul>
 
-    const current = servicios[activeIndex];
+                    <ul className="servicio-stack" aria-label={`Tecnologías para ${s.title}`}>
+                        {s.stack.map((t) => <li key={t}>{t}</li>)}
+                    </ul>
 
-    return (
-        <section id="entornos" className="animate-on-scroll">
-            <div className="entornos-header">
-                <span className="section-label">Servicios</span>
-                <h2 className="section-title">
-                    Entornos de <span className="gradient-text">Desarrollo</span>
-                </h2>
-                <p className="section-subtitle">
-                    Elige el tipo de solución que necesita tu negocio.
-                </p>
-            </div>
-
-            {/* Tabs */}
-            <div className="servicios-tabs">
-                {servicios.map((s, i) => (
-                    <button
-                        key={s.id}
-                        className={`servicio-tab ${activeIndex === i ? 'active' : ''}`}
-                        onClick={() => handleSelect(i)}
-                    >
-                        <span className="tab-icon">{s.icon}</span>
-                        {s.title}
-                    </button>
-                ))}
-            </div>
-
-            {/* Panel */}
-            <div className="servicios-panel panel-fade" key={panelKey}>
-                {/* Imagen */}
-                <div className="panel-imagen">
-                    <div className="panel-imagen-glow" />
-                    <img src={current.imagen} alt={current.title} />
-                </div>
-
-                {/* Texto */}
-                <div className="panel-texto">
-                    <span className="panel-numero">0{activeIndex + 1} / 0{servicios.length}</span>
-                    <h3 className="panel-titulo">
-                        {current.title}<br />
-                        <span>{current.highlight}</span>
-                    </h3>
-                    <p className="panel-descripcion">{current.descripcion}</p>
-                    <div className="panel-features">
-                        {current.features.map((f, i) => (
-                            <div key={i} className="panel-feature">
-                                <span className="feature-dot" />
-                                {f}
-                            </div>
-                        ))}
+                    {/* Pie fijo: la línea y "Cotizar" quedan a la misma altura en todas las tarjetas */}
+                    <div className="servicio-pie">
+                        <a
+                            className="servicio-cta"
+                            href={whatsapp(s.mensaje)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`Cotizar ${s.title} por WhatsApp`}
+                        >
+                            Cotizar <span className="btn-arrow" aria-hidden="true">→</span>
+                        </a>
                     </div>
-                </div>
-            </div>
-
-            {/* Nav dots */}
-            <div className="servicios-nav">
-                {servicios.map((_, i) => (
-                    <button
-                        key={i}
-                        className={`nav-dot ${activeIndex === i ? 'active' : ''}`}
-                        onClick={() => handleSelect(i)}
-                        aria-label={`Ver ${servicios[i].title}`}
-                    />
-                ))}
-            </div>
-        </section>
-    );
-};
+                </article>
+            ))}
+        </div>
+    </section>
+);
 
 export default Servicios;

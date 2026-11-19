@@ -1,9 +1,10 @@
 import React from 'react';
 import IconoEntorno from './iconosEntorno';
 
-const EntornoTabs = ({ entornos, activo, onCambiar }) => (
-    <div className="ph-entorno-tabs">
-        {entornos.map(e => (
+/* Filtros del portafolio. `opciones`: [{ id, nombre }], incluye "Todos". */
+const EntornoTabs = ({ opciones, activo, onCambiar }) => (
+    <div className="ph-entorno-tabs" role="group" aria-label="Filtrar proyectos por tipo">
+        {opciones.map(e => (
             <button
                 key={e.id}
                 type="button"

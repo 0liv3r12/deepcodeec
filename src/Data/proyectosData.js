@@ -1,5 +1,5 @@
 import { img } from '../utils/imageLoader';
-export const colorDeepCode = { from: '#38b6ff', to: '#8b5cf6' };
+export const colorDeepCode = { from: '#38b6ff', to: '#1570C9' };
 
 export const proyectosPorEntorno = {
     escritorio: [
@@ -9,7 +9,6 @@ export const proyectosPorEntorno = {
             titular: 'Gestión de clientes, ordenada.',
             descripcion: 'Sistema de escritorio para administrar clientes, contratos e información operativa desde un panel central.',
             tags: ['JavaScript', 'MySQL', 'CRUD', 'Dashboard'],
-            portada: img('iconKore.avif'),
             stack: ['JavaScript', 'MySQL', 'Electron'],
             features: [
                 'Gestión completa de clientes y contratos',
@@ -17,12 +16,18 @@ export const proyectosPorEntorno = {
                 'Búsqueda y filtrado avanzado de registros',
             ],
             color: colorDeepCode, // TODO: reemplazar por el color real de este sistema
+            captura: img('vDe2.avif'), // imagen del caso en el home
+            // Caso: Problema → Solución (descripcion) → Resultado. Solo se muestran si tienen texto.
+            // TODO Oliver: el problema real del cliente. Borrador: "La información de clientes y contratos estaba repartida en hojas de cálculo y papeles."
+            problema: null,
+            // TODO Oliver: resultado real y medible (no inventar). Ej.: tiempo ahorrado, errores evitados.
+            resultado: null,
             galeria: [
-                { type: 'img', src: img('vDe1.png'), label: 'Login' },
-                { type: 'img', src: img('vDe2.png'), label: 'Dashboard' },
-                { type: 'img', src: img('vDe3.jpg'), label: 'Informacion de Clientes' },
-                { type: 'img', src: img('vDe4.png'), label: 'Registro de Clientes' },
-                { type: 'img', src: img('vDe5.png'), label: 'Perfil de Usuario' },
+                { type: 'img', src: img('vDe1.avif'), label: 'Login' },
+                { type: 'img', src: img('vDe2.avif'), label: 'Dashboard' },
+                { type: 'img', src: img('vDe3.avif'), label: 'Informacion de Clientes' },
+                { type: 'img', src: img('vDe4.avif'), label: 'Registro de Clientes' },
+                { type: 'img', src: img('vDe5.avif'), label: 'Perfil de Usuario' },
             ],
         },
         // Agrega más proyectos de escritorio aquí
@@ -34,7 +39,6 @@ export const proyectosPorEntorno = {
             titular: 'Tu salud, en tus manos.',
             descripcion: 'Vitaria conecta pacientes con especialistas médicos: agenda de citas, recordatorios automáticos y seguimiento, todo desde el celular.',
             tags: ['Flutter', 'Dart', 'Citas Médicas', 'UI/UX'],
-            portada: img('iconVitaria.avif'),
             stack: ['Flutter', 'Dart', 'Firebase'],
             features: [
                 'Agenda de citas con especialistas médicos',
@@ -42,18 +46,23 @@ export const proyectosPorEntorno = {
                 'Panel de administración para médicos',
             ],
             color: colorDeepCode, // TODO: reemplazar por el color real de Vitaria
+            captura: img('vDm6.avif'),
+            // TODO Oliver: el problema real. Borrador: "Las citas se coordinaban por llamadas y mensajes, con olvidos y espacios vacíos en la agenda."
+            problema: null,
+            // TODO Oliver: resultado real y medible (no inventar).
+            resultado: null,
             galeria: [
-                { type: 'img', src: img('vDm1.png'), label: 'Onboarding' },
-                { type: 'img', src: img('vDm2.png'), label: 'Onboarding' },
-                { type: 'img', src: img('vDm3.png'), label: 'Onboarding' },
-                { type: 'img', src: img('vDm4.png'), label: 'Login' },
-                { type: 'img', src: img('vDm5.png'), label: 'Registro' },
-                { type: 'img', src: img('vDm6.png'), label: 'Inicio' },
-                { type: 'img', src: img('vDm7.png'), label: 'Mis Citas' },
-                { type: 'img', src: img('vDm8.png'), label: 'Perfil de Usuario' },
-                { type: 'img', src: img('vDm9.png'), label: 'Panel Admin' },
-                { type: 'img', src: img('vDm10.png'), label: 'Calendario' },
-                { type: 'img', src: img('vDm11.png'), label: 'Pacientes' },
+                { type: 'img', src: img('vDm1.avif'), label: 'Onboarding' },
+                { type: 'img', src: img('vDm2.avif'), label: 'Onboarding' },
+                { type: 'img', src: img('vDm3.avif'), label: 'Onboarding' },
+                { type: 'img', src: img('vDm4.avif'), label: 'Login' },
+                { type: 'img', src: img('vDm5.avif'), label: 'Registro' },
+                { type: 'img', src: img('vDm6.avif'), label: 'Inicio' },
+                { type: 'img', src: img('vDm7.avif'), label: 'Mis Citas' },
+                { type: 'img', src: img('vDm8.avif'), label: 'Perfil de Usuario' },
+                { type: 'img', src: img('vDm9.avif'), label: 'Panel Admin' },
+                { type: 'img', src: img('vDm10.avif'), label: 'Calendario' },
+                { type: 'img', src: img('vDm11.avif'), label: 'Pacientes' },
             ],
         },
         // Agrega más proyectos móviles aquí
@@ -65,7 +74,6 @@ export const proyectosPorEntorno = {
             titular: 'Tu restaurante, servido en digital.',
             descripcion: 'Sitio web completo para restaurantes: menú digital, reservas online con confirmación automática, métodos de pago y un panel de administración para que el dueño gestione todo sin depender de un desarrollador.',
             tags: ['React', 'Node.js', 'Reservas Online', 'Panel Admin'],
-            portada: img('Ambre-logo.avif'),
             stack: ['React', 'Express', 'Prisma', 'SQLite'],
             features: [
                 'Reservas online con confirmación automática por WhatsApp',
@@ -73,6 +81,11 @@ export const proyectosPorEntorno = {
                 'Panel de administración para gestionar todo el contenido',
             ],
             color: { from: '#c9a227', to: '#f5c451' }, // paleta dorada real de Ambre
+            captura: img('inicio.avif'),
+            // TODO Oliver: el problema real. Borrador: "Las reservas llegaban por llamadas y mensajes sueltos, y cambiar el menú dependía de un desarrollador."
+            problema: null,
+            // TODO Oliver: resultado real y medible (no inventar).
+            resultado: null,
             galeria: [
                 { type: 'img', src: img('inicio.avif'), label: 'Inicio' },
                 { type: 'img', src: img('menu.avif'), label: 'Menu' },

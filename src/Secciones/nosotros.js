@@ -1,89 +1,92 @@
 import React from 'react';
-import Oliver from "../Imagenes/Oliver.jpg";
+import Oliver from '../Imagenes/Oliver.jpg';
 import '../Estilos/nosotros.css';
 
-const Nosotros = () => {
-    return (
-        <section id="nosotros" className="animate-on-scroll">
-            <div className="nosotros-inner">
+/* TODO Oliver: los textos de esta sección son un borrador para que los corrijas. */
+const datos = [
+    { numero: 4, etiqueta: 'plataformas: web, móvil, escritorio y bases de datos' },
+    { numero: 8, sufijo: ' años', etiqueta: 'en la industria de eventos: negocios reales, no solo código' },
+    { numero: 1, etiqueta: 'persona responsable de tu proyecto, de la idea a producción' },
+];
 
-                {/* ── Columna izquierda ── */}
-                <div className="nosotros-content">
-                    <span className="section-label">Nosotros</span>
-                    <h2 className="section-title">
-                        ¿Por qué elegir <span className="gradient-text">DeepCode?</span>
-                    </h2>
+const Nosotros = () => (
+    <section id="nosotros">
+        <div className="nosotros-inner">
 
-                    <p className="nosotros-intro">
-                        En DeepCode construimos soluciones digitales que van más allá del diseño bonito.
-                        Cada proyecto empieza por entender tu negocio: qué necesitas, cómo creces,
-                        y qué problemas reales tienes que resolver. El resultado es software funcional,
-                        bien estructurado y pensado para durar.
+            {/* ── Foto: siempre visible, con borde azul animado ── */}
+            <figure className="fundador" data-reveal>
+                <div className="fundador-marco" data-tilt>
+                    <img
+                        src={Oliver}
+                        alt="Oliver Torres, fundador de DeepCodeEc"
+                        width="670"
+                        height="844"
+                        loading="lazy"
+                        decoding="async"
+                    />
+                    <span className="fundador-etiqueta">Fundador</span>
+                </div>
+                <figcaption>
+                    <strong>Oliver Torres</strong>
+                    <span>Desarrollador full stack · Loja, Ecuador</span>
+                </figcaption>
+            </figure>
+
+            {/* ── Historia, datos, visión y misión ── */}
+            <div className="nosotros-content">
+                <span className="section-label" data-reveal>Quién está detrás</span>
+                <h2 className="section-title" data-reveal>
+                    Una persona, <span className="gradient-text">de la idea a producción.</span>
+                </h2>
+
+                <div className="nosotros-historia" data-reveal>
+                    <p>
+                        Soy Oliver Torres, fundador de DeepCodeEc y desarrollador full stack:
+                        diseño, programo y publico cada proyecto de principio a fin.
                     </p>
-
-                    <div className="nosotros-stats">
-                        <div className="stat">
-                            <span className="stat-number">4+</span>
-                            <span className="stat-label">Tecnologías</span>
-                        </div>
-                        <div className="stat">
-                            <span className="stat-number">Web·Móvil·Desktop</span>
-                            <span className="stat-label">Plataformas</span>
-                        </div>
-                    </div>
-
-                    <div className="nosotros-cards">
-                        <div className="carta">
-                            <h3>Visión</h3>
-                            <p>
-                                Ser el estudio de desarrollo de referencia en el sur del Ecuador,
-                                reconocido por entregar software que realmente resuelve problemas
-                                y acompaña el crecimiento de cada cliente.
-                            </p>
-                        </div>
-                        <div className="carta">
-                            <h3>Misión</h3>
-                            <p>
-                                Construir soluciones digitales claras, escalables y bien estructuradas,
-                                aplicando buenas prácticas de ingeniería en cada etapa del proyecto.
-                            </p>
-                        </div>
-                    </div>
+                    <p>
+                        Soy Tecnólogo en Desarrollo de Software y pasé cerca de 8 años en la
+                        industria de eventos.
+                    </p>
+                    <p>
+                        Por eso entiendo cómo funciona un negocio real, no solo el código:
+                        hablo tu idioma y pienso en tus clientes.
+                    </p>
                 </div>
 
-                {/* ── Columna derecha ── */}
-                <div className="nosotros-team">
-                    <span className="team-label">Equipo</span>
-
-                    <div className="flip-card">
-                        <div className="flip-card-inner">
-                            <div className="flip-card-front">
-                                <img src={Oliver} alt="Oliver Torres" />
-                            </div>
-                            <div className="flip-card-back">
-                                <h2>Oliver Torres</h2>
-                                <p className="role">Fundador · Full Stack Developer</p>
-                                <p>
-                                    Desarrollador full stack enfocado en construir productos digitales
-                                    funcionales y escalables. Trabajo con tecnologías modernas en
-                                    cada capa del proyecto — desde la interfaz hasta el servidor.
-                                    <br /><br />
-                                    <strong style={{ color: 'var(--text-primary)' }}>Stack principal:</strong><br />
-                                    • Web: React, HTML5, CSS3, JavaScript<br />
-                                    • Móvil: Flutter, React Native<br />
-                                    • Backend: Node.js, Express, Prisma<br />
-                                    • DB: PostgreSQL, MySQL, Firebase
-                                </p>
-                            </div>
+                <dl className="nosotros-stats" data-reveal>
+                    {datos.map((d) => (
+                        <div key={d.etiqueta} className="stat">
+                            <dt className="stat-label">{d.etiqueta}</dt>
+                            <dd className="stat-number">
+                                {/* El número visible cuenta hacia arriba; el lector oye el valor final */}
+                                <span aria-hidden="true" data-contar={d.numero}>{d.numero}</span>
+                                {d.sufijo && <span aria-hidden="true">{d.sufijo}</span>}
+                                <span className="sr-only">{d.numero}{d.sufijo}</span>
+                            </dd>
                         </div>
+                    ))}
+                </dl>
+
+                <div className="nosotros-cards">
+                    <div className="carta" data-reveal data-spotlight data-tilt>
+                        <h3>Visión</h3>
+                        <p>
+                            Una idea nacida en Loja que lleva software bien hecho a negocios de
+                            todo el Ecuador.
+                        </p>
                     </div>
-
-                    <span className="flip-hint">↕ Pasa el cursor para ver el perfil</span>
+                    <div className="carta" data-reveal data-spotlight data-tilt>
+                        <h3>Misión</h3>
+                        <p>
+                            Construir soluciones digitales claras, seguras y escalables, con buenas
+                            prácticas en cada etapa, para que cada negocio trabaje mejor.
+                        </p>
+                    </div>
                 </div>
-
             </div>
-        </section>
-    );
-};
+        </div>
+    </section>
+);
 
 export default Nosotros;

@@ -24,7 +24,14 @@ const IconBD = () => (
     </svg>
 );
 
-const iconos = { web: IconWeb, movil: IconMovil, escritorio: IconEscritorio, bd: IconBD };
+const IconTodos = () => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+        <rect x="4" y="4" width="7" height="7" rx="1.5" /><rect x="13" y="4" width="7" height="7" rx="1.5" />
+        <rect x="4" y="13" width="7" height="7" rx="1.5" /><rect x="13" y="13" width="7" height="7" rx="1.5" />
+    </svg>
+);
+
+const iconos = { todos: IconTodos, web: IconWeb, movil: IconMovil, escritorio: IconEscritorio, bd: IconBD };
 
 /* Icono del entorno; `sm` para la versión pequeña de las tarjetas de número. */
 const IconoEntorno = ({ id, sm = false }) => {

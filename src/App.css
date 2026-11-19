@@ -4,44 +4,155 @@ section {
     width: 100%;
 }
 
-/* ── Scroll reveal ── */
-.animate-on-scroll {
+/* ── Reveal por elemento (lo activa ScrollAnimationHandler) ──
+   Usa `translate` (no `transform`) para no chocar con el tilt, y una animación
+   (no transition) para no pisar las transiciones de hover de cada componente. */
+[data-reveal]:not(.is-visible) {
     opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
-.animate-on-scroll.active {
-    opacity: 1;
-    transform: translateY(0);
+[data-reveal].is-visible {
+    animation: dc-reveal var(--dur-3) var(--ease) var(--reveal-delay, 0ms) both;
 }
 
-/* ── Fondo animado global ── */
+@keyframes dc-reveal {
+    from {
+        opacity: 0;
+        translate: 0 var(--space-3);
+    }
+
+    to {
+        opacity: 1;
+        translate: none;
+    }
+}
+
+/* Desenfoque solo con mouse: en celulares gama baja el blur es caro */
+@media (hover: hover) and (pointer: fine) {
+    [data-reveal].is-visible {
+        animation-name: dc-reveal-blur;
+    }
+}
+
+@keyframes dc-reveal-blur {
+    from {
+        opacity: 0;
+        translate: 0 var(--space-3);
+        filter: blur(6px);
+    }
+
+    to {
+        opacity: 1;
+        translate: none;
+        filter: none;
+    }
+}
+
+/* Sin movimiento: todo visible desde el inicio. El selector repite el de arriba
+   (:not(.is-visible)) para ganarle en especificidad. */
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal]:not(.is-visible),
+    [data-reveal].is-visible {
+        opacity: 1;
+        animation: none;
+    }
+}
+
+/* ── Transiciones de página (View Transitions): misma curva y duración de la marca ── */
+::view-transition-group(*) {
+    animation-duration: var(--dur-3);
+    animation-timing-function: var(--ease);
+}
+
+/* ── Spotlight: luz radial que sigue al cursor (--mx/--my desde JS) ── */
+[data-spotlight] {
+    position: relative;
+    isolation: isolate;
+}
+
+[data-spotlight]::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), var(--spotlight), transparent 70%);
+    opacity: 0;
+    transition: opacity var(--dur-2) var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    [data-spotlight]:hover::before {
+        opacity: 1;
+    }
+}
+
+/* ── Tilt 3D (--rx/--ry desde JS, máx. 8°), solo desktop y con movimiento ──
+   `html` sube la especificidad sobre la clase del componente; por eso la
+   transición incluye las propiedades de hover habituales de las tarjetas. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    html [data-tilt] {
+        transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+        transition:
+            transform var(--dur-2) var(--ease),
+            border-color var(--dur-2) var(--ease),
+            box-shadow var(--dur-2) var(--ease),
+            background-color var(--dur-2) var(--ease);
+    }
+}
+
+/* ── Fondo global: estático (no repinta), gradientes azules + rejilla + grano ── */
 .dc-bg {
     position: fixed;
     inset: 0;
     z-index: -1;
     background-color: var(--bg-base);
     background-image:
-        radial-gradient(ellipse 80% 60% at 10% 20%, rgba(123, 47, 255, 0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 90% 80%, rgba(56, 182, 255, 0.14) 0%, transparent 55%),
-        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(56, 182, 255, 0.05) 0%, transparent 70%);
-    animation: bg-shift 14s ease-in-out infinite alternate;
+        radial-gradient(ellipse 70% 55% at 12% 0%, var(--glow-deep) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 45% at 92% 85%, var(--accent-blue-dim) 0%, transparent 60%);
 }
 
-@keyframes bg-shift {
-    0% {
-        background-position: 0% 0%, 100% 100%, 50% 50%;
-    }
+.dc-bg::before,
+.dc-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
 
-    100% {
-        background-position: 15% 10%, 85% 90%, 55% 45%;
-    }
+/* Rejilla técnica, visible solo arriba y desvanecida hacia los bordes */
+.dc-bg::before {
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: var(--space-8) var(--space-8);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 75%);
+}
+
+/* Grano muy leve (SVG inline, sin descargas) */
+.dc-bg::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.035;
 }
 
 /* ── Utilidades ── */
+/* Texto solo para lectores de pantalla */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 .gradient-text {
-    background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+    background: var(--gradient-brand);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -56,6 +167,24 @@ section {
     color: var(--accent-blue);
     margin-bottom: 1rem;
     display: block;
+}
+
+/* Corchetes de marca: < SERVICIOS />. El texto alternativo vacío evita que
+   el lector de pantalla los lea. */
+.section-label::before {
+    content: '< ';
+    content: '< ' / '';
+}
+
+.section-label::after {
+    content: ' />';
+    content: ' />' / '';
+}
+
+.section-label::before,
+.section-label::after {
+    font-weight: 400;
+    color: var(--accent-ice);
 }
 
 .section-title {
@@ -73,4 +202,93 @@ section {
     color: var(--text-secondary);
     max-width: 560px;
     line-height: 1.65;
+}
+
+/* ── Botones (compartidos por todas las secciones) ── */
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    min-height: var(--tap-min);
+    padding: 0 var(--space-3);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+        transform var(--dur-2) var(--ease),
+        box-shadow var(--dur-2) var(--ease),
+        background-color var(--dur-2) var(--ease),
+        border-color var(--dur-2) var(--ease),
+        color var(--dur-2) var(--ease);
+}
+
+/* Azul sólido con texto oscuro: el blanco sobre #38B6FF no pasa contraste */
+.btn-primary {
+    background-color: var(--accent-blue);
+    color: var(--accent-on);
+    box-shadow: 0 4px 20px var(--glow-blue);
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-ice);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px var(--glow-blue);
+}
+
+/* Destello que cruza el botón al hacer hover */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 35%, var(--shine) 50%, transparent 65%);
+    transform: translateX(-120%);
+}
+
+.btn-primary:hover::after {
+    transform: translateX(120%);
+    transition: transform var(--dur-3) var(--ease);
+}
+
+/* Flecha que se desplaza */
+.btn-arrow {
+    display: inline-block;
+    transition: transform var(--dur-2) var(--ease);
+}
+
+.btn-primary:hover .btn-arrow,
+.btn-secondary:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+.btn-primary:active,
+.btn-secondary:active {
+    transform: scale(0.98);
+    transition-duration: var(--dur-1);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-hover);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    background-color: var(--accent-blue-dim);
 }

@@ -1,22 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+/* Fuentes: Inter (texto) + Space Grotesk (títulos). Los @font-face y los preload
+   están en public/index.html (los archivos viven en public/fonts). */
 
 :root {
-  --bg-base: #0A0A0F;
-  --bg-surface: #111118;
+  /* ── Marca DeepCodeEc ── */
+  --brand-blue: #38B6FF;
+  --brand-deep: #1570C9;
+  --brand-ice: #BDE8FF;
+  --brand-night: #0A0A0F;
+  --brand-black: #000000;
+  --brand-bone: #F4F3EC;
+
+  /* ── Superficies ── */
+  --bg-base: var(--brand-night);
   --bg-card: #14141E;
-  --accent-blue: #38B6FF;
-  --accent-purple: #7B2FFF;
+
+  /* ── Acento ── */
+  --accent-blue: var(--brand-blue);
+  --accent-ice: var(--brand-ice);
+  --accent-on: var(--brand-night); /* texto sobre azul sólido: 8.7:1 */
   --accent-blue-dim: rgba(56, 182, 255, 0.15);
-  --accent-purple-dim: rgba(123, 47, 255, 0.15);
-  --text-primary: #E8F4FD;
+  --gradient-brand: linear-gradient(120deg, var(--brand-ice) 0%, var(--brand-blue) 55%, var(--brand-deep) 100%);
+
+  /* ── Texto (contraste AA sobre --bg-base y --bg-card) ── */
+  --text-primary: var(--brand-bone);
   --text-secondary: #8A9BB0;
-  --text-muted: #4A5568;
+  --text-muted: #738396;
+
+  /* ── Bordes y brillos ── */
   --border: rgba(56, 182, 255, 0.12);
   --border-hover: rgba(56, 182, 255, 0.35);
   --glow-blue: rgba(56, 182, 255, 0.25);
-  --glow-purple: rgba(123, 47, 255, 0.2);
+  --glow-deep: rgba(21, 112, 201, 0.22);
+  --grid-line: rgba(56, 182, 255, 0.06);
+  --spotlight: rgba(56, 182, 255, 0.12);
+  --shine: rgba(244, 243, 236, 0.55);
+  --glass: rgba(10, 10, 15, 0.78);
+  --danger: #FF8A8A; /* errores de formulario: ~8:1 sobre --bg-card */
+  --sk-base: rgba(244, 243, 236, 0.06);
+  --sk-brillo: rgba(244, 243, 236, 0.08);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
+
+  /* ── Tipografía ── */
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
+
+  /* ── Movimiento: una sola curva, tres duraciones ── */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-1: 150ms;
+  --dur-2: 300ms;
+  --dur-3: 600ms;
+
+  /* ── Espaciado (múltiplos de 8) ── */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-12: 96px;
+
+  /* ── Radios ── */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* ── Controles ── */
+  --tap-min: 48px;
 }
 
 *,
@@ -40,12 +92,27 @@ body {
   overflow-x: hidden;
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+::selection {
+  background: var(--accent-blue);
+  color: var(--accent-on);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
