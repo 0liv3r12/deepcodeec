@@ -4,11 +4,6 @@ import { REDES, WHATSAPP_URL } from '../Data/contacto';
 import '../Estilos/NavBarStyle.css';
 
 /* Íconos de línea para cada sección (usados en la barra inferior móvil) */
-const IconInicio = () => (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M3 10.5 12 3l9 7.5" /><path d="M5 9.5V21h14V9.5" />
-    </svg>
-);
 const IconServicios = () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <rect x="3" y="3" width="7" height="7" rx="1.5" /><rect x="14" y="3" width="7" height="7" rx="1.5" />
@@ -26,30 +21,29 @@ const IconNosotros = () => (
     </svg>
 );
 
-const IconContacto = () => (
+const IconProceso = () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z" />
+        <circle cx="6" cy="5" r="2" /><circle cx="6" cy="19" r="2" /><path d="M6 7v10M11 5h9M11 19h9M11 12h6" />
     </svg>
 );
 
-/* `donde`: 'movil' solo en la barra inferior, 'desktop' solo arriba.
-   Arriba no va "Inicio" (lo hace el logo) ni "Contacto" (lo hace "Cotizar")
-   para que entren hasta 769px; abajo no va "Proceso" para que quepa a 390px. */
+/* Mismos links en desktop (arriba) y móvil (abajo). En los dos, "Inicio" es el
+   logo y "Contacto" es el botón "Cotizar". */
 const links = [
-    { href: '#home', label: 'Inicio', Icon: IconInicio, donde: 'movil' },
     { href: '#entornos', label: 'Servicios', Icon: IconServicios },
     { href: '#proyectos', label: 'Proyectos', Icon: IconProyectos },
-    { href: '#proceso', label: 'Proceso', donde: 'desktop' },
+    { href: '#proceso', label: 'Proceso', Icon: IconProceso },
     { href: '#nosotros', label: 'Sobre mí', Icon: IconNosotros }, // trabajo solo: no "Nosotros"
-    { href: '#contacto', label: 'Contacto', Icon: IconContacto, donde: 'movil' },
 ];
-const linksArriba = links.filter(l => l.donde !== 'movil');
-const linksAbajo = links.filter(l => l.donde !== 'desktop');
+// También se observan el hero y contacto: ahí ningún link queda activo
+const seccionesObservadas = ['#home', ...links.map(l => l.href), '#contacto'];
 
 const NavBar = () => {
     const [active, setActive] = useState('#home');
     const [compacta, setCompacta] = useState(false);
+    const [barraOculta, setBarraOculta] = useState(false);
     const bloqueoHasta = useRef(0);
+    const ultimoY = useRef(0);
 
     // Sección activa según lo que está en el centro de la pantalla
     useEffect(() => {
@@ -64,7 +58,7 @@ const NavBar = () => {
             { rootMargin: '-40% 0px -55% 0px' }
         );
 
-        links.forEach(({ href }) => {
+        seccionesObservadas.forEach((href) => {
             const el = document.querySelector(href);
             if (el) observer.observe(el);
         });
@@ -72,9 +66,20 @@ const NavBar = () => {
         return () => observer.disconnect();
     }, []);
 
-    // Barra compacta al bajar (React no re-renderiza si el valor no cambia)
+    // Arriba: compacta al bajar. Abajo (móvil): se esconde al bajar (leyendo) y vuelve
+    // al subir, arriba de todo o al llegar al final. React no re-renderiza si no cambia.
     useEffect(() => {
-        const alHacerScroll = () => setCompacta(window.scrollY > 8);
+        const alHacerScroll = () => {
+            const y = window.scrollY;
+            setCompacta(y > 8);
+            const delta = y - ultimoY.current;
+            if (Math.abs(delta) < 8) return; // ignora el temblor del dedo
+            ultimoY.current = y;
+            const alFinal = window.innerHeight + y >= document.documentElement.scrollHeight - 80;
+            // Durante un scroll iniciado por la barra, no esconderla
+            const porLaBarra = Date.now() < bloqueoHasta.current;
+            setBarraOculta(delta > 0 && y > 120 && !alFinal && !porLaBarra);
+        };
         alHacerScroll();
         window.addEventListener('scroll', alHacerScroll, { passive: true });
         return () => window.removeEventListener('scroll', alHacerScroll);
@@ -89,8 +94,9 @@ const NavBar = () => {
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
-    // En el hero no hay link activo arriba: la pill se oculta
-    const indiceActivo = linksArriba.findIndex(l => l.href === active);
+    // En el hero y en contacto no hay link activo: las pills se ocultan
+    const indiceActivo = links.findIndex(l => l.href === active);
+    const pill = { '--i': Math.max(0, indiceActivo), '--n': links.length };
 
     return (
         <>
@@ -104,13 +110,10 @@ const NavBar = () => {
                     <img src={logo} alt="DeepCodeEc" className="logo-img" width="224" height="32" />
                 </a>
 
-                <div
-                    className={`nav-centro ${indiceActivo < 0 ? 'sin-activo' : ''}`}
-                    style={{ '--i': Math.max(0, indiceActivo), '--n': linksArriba.length }}
-                >
+                <div className={`nav-centro ${indiceActivo < 0 ? 'sin-activo' : ''}`} style={pill}>
                     <span className="nav-pill" aria-hidden="true" />
                     <ul className="nav-links">
-                        {linksArriba.map(({ href, label }) => (
+                        {links.map(({ href, label }) => (
                             <li key={href}>
                                 <a
                                     href={href}
@@ -140,18 +143,23 @@ const NavBar = () => {
             </nav>
 
             {/* ── Barra inferior flotante (solo móvil) ── */}
-            <nav className="bottom-nav" aria-label="Secciones">
-                {linksAbajo.map(({ href, label, Icon }) => (
+            {/* Mismos links que arriba; la pill azul se desliza a la sección activa */}
+            <nav
+                className={`bottom-nav ${barraOculta ? 'is-oculta' : ''} ${indiceActivo < 0 ? 'sin-activo' : ''}`}
+                aria-label="Secciones"
+                style={pill}
+            >
+                <span className="bottom-pill" aria-hidden="true" />
+                {links.map(({ href, label, Icon }) => (
                     <button
                         key={href}
                         type="button"
                         className={`bottom-nav-item ${active === href ? 'active' : ''}`}
                         onClick={() => irA(href)}
-                        aria-label={label}
                         aria-current={active === href ? 'true' : undefined}
                     >
-                        <span className="bottom-nav-icon"><Icon /></span>
-                        <span className="bottom-nav-label" aria-hidden="true">{label}</span>
+                        <Icon />
+                        <span className="bottom-nav-label">{label}</span>
                     </button>
                 ))}
             </nav>

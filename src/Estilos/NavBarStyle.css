@@ -203,9 +203,10 @@
         display: none;
     }
 
+    /* Barra inferior: mismos 4 links que arriba (ícono + nombre). Se esconde al
+       bajar y vuelve al subir; solo anima transform y opacity. */
     .bottom-nav {
         display: flex;
-        align-items: center;
         gap: 4px;
         position: fixed;
         bottom: calc(var(--space-2) + env(safe-area-inset-bottom, 0px));
@@ -217,68 +218,66 @@
         backdrop-filter: blur(18px);
         -webkit-backdrop-filter: blur(18px);
         border: 1px solid var(--border);
-        border-radius: var(--radius-pill);
+        border-radius: var(--radius-lg);
         box-shadow: var(--shadow-lg);
-        max-width: calc(100vw - var(--space-4));
+        transition: transform var(--dur-3) var(--ease), opacity var(--dur-2) var(--ease);
+    }
+
+    /* Escondida mientras se lee; si recibe foco por teclado, vuelve */
+    .bottom-nav.is-oculta:not(:focus-within) {
+        transform: translate(-50%, calc(100% + var(--space-4)));
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Pill azul que se desliza al ítem activo (72px de ancho + 4px de separación) */
+    .bottom-pill {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 72px;
+        height: 52px;
+        border-radius: var(--radius-md);
+        background-color: var(--accent-blue);
+        transform: translateX(calc(var(--i) * 76px));
+        transition: transform var(--dur-3) var(--ease), opacity var(--dur-2) var(--ease);
+        pointer-events: none;
+    }
+
+    .bottom-nav.sin-activo .bottom-pill {
+        opacity: 0;
     }
 
     .bottom-nav-item {
+        position: relative;
         display: flex;
-        align-items: center;
-        min-width: 44px;
-        min-height: 44px;
-        padding: 12px;
-        border: none;
-        background: transparent;
-        color: var(--text-secondary);
-        border-radius: var(--radius-pill);
-        cursor: pointer;
-        white-space: nowrap;
-        transition:
-            background-color var(--dur-2) var(--ease),
-            color var(--dur-2) var(--ease);
-    }
-
-    .bottom-nav-icon {
-        display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
+        gap: 2px;
+        width: 72px;
+        height: 52px;
+        border: none;
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: var(--text-secondary);
+        font-family: var(--font-body);
+        cursor: pointer;
+        transition: color var(--dur-2) var(--ease);
     }
 
-    .bottom-nav-icon svg {
+    .bottom-nav-item svg {
         width: 20px;
         height: 20px;
     }
 
-    /* La etiqueta aparece por opacidad + desplazamiento, sin animar el ancho */
     .bottom-nav-label {
-        display: none;
-        font-size: 0.85rem;
+        font-size: 0.6875rem;
         font-weight: 600;
+        white-space: nowrap;
     }
 
     .bottom-nav-item.active {
-        background-color: var(--accent-blue);
         color: var(--accent-on);
-        padding: 12px var(--space-2);
-    }
-
-    .bottom-nav-item.active .bottom-nav-label {
-        display: inline;
-        margin-left: var(--space-1);
-        animation: dc-etiqueta var(--dur-2) var(--ease) both;
-    }
-}
-
-@keyframes dc-etiqueta {
-    from {
-        opacity: 0;
-        translate: -4px 0;
-    }
-
-    to {
-        opacity: 1;
-        translate: none;
     }
 }
