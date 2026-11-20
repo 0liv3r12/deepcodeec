@@ -36,6 +36,7 @@
   --shine: rgba(244, 243, 236, 0.55);
   --glass: rgba(10, 10, 15, 0.78);
   --danger: #FF8A8A; /* errores de formulario: ~8:1 sobre --bg-card */
+  --scroll-thumb: rgba(56, 182, 255, 0.45);
   --sk-base: rgba(244, 243, 236, 0.06);
   --sk-brillo: rgba(244, 243, 236, 0.08);
   --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
@@ -81,6 +82,31 @@
 
 html {
   scroll-behavior: smooth;
+  /* Barra de scroll de la marca: delgada, azul sobre noche (Chrome, Brave, Edge, Firefox) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) var(--bg-base);
+}
+
+/* Safari y navegadores sin scrollbar-color */
+@supports not (scrollbar-color: auto) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-base);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scroll-thumb);
+    border: 2px solid var(--bg-base);
+    border-radius: var(--radius-pill);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-blue);
+  }
 }
 
 body {

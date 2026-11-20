@@ -101,9 +101,14 @@
     margin-bottom: -0.1em;
 }
 
+/* Propiedades sueltas (no el atajo `animation`): el minificador reordena y el
+   atajo pisaría el retraso escalonado */
 .palabra > span {
     display: inline-block;
-    animation: dc-palabra 500ms var(--ease) both;
+    animation-name: dc-palabra;
+    animation-duration: 500ms;
+    animation-timing-function: var(--ease);
+    animation-fill-mode: both;
     animation-delay: calc(60ms + var(--i) * 35ms);
 }
 

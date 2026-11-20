@@ -121,10 +121,15 @@
 
 /* ── Scroll-driven: la línea se dibuja con el scroll y cada paso se enciende
    cuando su borde superior cruza el 60% de la pantalla. ── */
+/* Ojo: propiedades sueltas, nunca el atajo `animation`. El minificador del build
+   reordena las declaraciones y el atajo reinicia animation-timeline: en
+   producción la línea quedaba completa sin seguir el scroll. */
 @supports (animation-timeline: view()) {
     .proceso-progreso {
         transition: none;
-        animation: dc-linea linear both;
+        animation-name: dc-linea;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         animation-timeline: view();
         /* empieza cuando el tope de la línea llega al 60% de la pantalla
            y termina cuando llega su final */
@@ -134,14 +139,18 @@
     .proceso-paso {
         view-timeline-name: --paso;
         transition: none;
-        animation: dc-encender linear both;
+        animation-name: dc-encender;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         animation-timeline: --paso;
         animation-range: cover 40vh cover calc(40vh + 80px);
     }
 
     .proceso-punto::after {
         transition: none;
-        animation: dc-punto linear both;
+        animation-name: dc-punto;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         animation-timeline: --paso;
         animation-range: cover 40vh cover calc(40vh + 80px);
     }
